@@ -1,0 +1,26 @@
+.admin-layout {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%);
+}
+
+.admin-main {
+  margin-left: 260px;
+  min-height: 100vh;
+  padding: 2rem;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-layout:has(.admin-sidebar.collapsed) .admin-main {
+  margin-left: 80px;
+}
+
+@media (max-width: 1024px) {
+  .admin-main {
+    margin-left: 0;
+    padding: 5rem 1rem 2rem;
+  }
+
+  .admin-layout:has(.admin-sidebar.collapsed) .admin-main {
+    margin-left: 0;
+  }
+}

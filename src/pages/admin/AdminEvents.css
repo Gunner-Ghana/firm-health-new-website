@@ -1,0 +1,350 @@
+.admin-events {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-events .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-events .page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.admin-events .page-header p {
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Event Form */
+.event-form-container {
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.event-form-container h2 {
+  margin: 0 0 1.5rem 0;
+  color: #1f2937;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.event-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.event-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-form label {
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.9375rem;
+}
+
+.event-form input[type="text"],
+.event-form input[type="date"],
+.event-form select,
+.event-form textarea {
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.2s;
+}
+
+.event-form input[type="text"]:focus,
+.event-form input[type="date"]:focus,
+.event-form select:focus,
+.event-form textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.event-form select {
+  cursor: pointer;
+}
+
+.event-form textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+/* Events Grid */
+.admin-events .events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-events .event-card {
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-events .event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.admin-events .event-type-badge {
+  padding: 0.375rem 0.875rem;
+  border-radius: 50px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.admin-events .event-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+.admin-events .event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.admin-events .event-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.admin-events .event-detail svg {
+  width: 18px;
+  height: 18px;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.admin-events .event-description {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+}
+
+.event-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.event-actions button {
+  padding: 0.5rem 0.875rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-events .toggle-btn {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.admin-events .toggle-btn:hover {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.admin-events .edit-btn {
+  background: rgba(107, 114, 128, 0.1);
+  color: #4b5563;
+}
+
+.admin-events .edit-btn:hover {
+  background: rgba(107, 114, 128, 0.2);
+}
+
+.admin-events .delete-btn {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.admin-events .delete-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+.admin-events .confirm-delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.admin-events .confirm-delete-btn:hover {
+  background: #dc2626;
+}
+
+.admin-events .cancel-btn {
+  background: rgba(107, 114, 128, 0.1);
+  color: #4b5563;
+}
+
+.admin-events .cancel-btn:hover {
+  background: rgba(107, 114, 128, 0.2);
+}
+
+/* Reusing common styles */
+.admin-events .publish-status {
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.admin-events .publish-status.published {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+
+.admin-events .publish-status.draft {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+.admin-events .empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.admin-events .empty-state svg {
+  width: 64px;
+  height: 64px;
+  color: #d1d5db;
+  margin-bottom: 1rem;
+}
+
+.admin-events .empty-state h3 {
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+}
+
+.admin-events .empty-state p {
+  color: #6b7280;
+  margin: 0 0 1.5rem 0;
+}
+
+.admin-events .create-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.admin-events .create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.admin-events .create-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.admin-events .form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.admin-events .form-actions .cancel-btn,
+.admin-events .form-actions .save-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-events .form-actions .save-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.admin-events .form-actions .save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.admin-events .checkbox-group {
+  flex-direction: row !important;
+}
+
+.admin-events .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.admin-events .checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #10b981;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .admin-events .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-form-container {
+    padding: 1.5rem;
+  }
+
+  .event-form .form-row {
+    grid-template-columns: 1fr;
+  }
+}
