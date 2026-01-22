@@ -28,6 +28,7 @@ import AdminBlogs from './pages/admin/AdminBlogs';
 import AdminEvents from './pages/admin/AdminEvents';
 import AdminInterventions from './pages/admin/AdminInterventions';
 import AdminPhotos from './pages/admin/AdminPhotos';
+import AdminMembers from './pages/admin/AdminMembers';
 // Dynamic Intervention Detail
 import InterventionDetail from './pages/interventions/InterventionDetail';
 import './App.css';
@@ -77,6 +78,7 @@ function AppContent() {
           <Route path="/admin/events" element={<AdminEvents />} />
           <Route path="/admin/interventions" element={<AdminInterventions />} />
           <Route path="/admin/photos" element={<AdminPhotos />} />
+          <Route path="/admin/members" element={<AdminMembers />} />
         </Routes>
       </main>
       {!isAdminDashboard && <Footer />}
