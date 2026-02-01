@@ -1,4 +1,13 @@
+import { useMemo } from 'react';
 import { useScrollAnimation, useMultipleScrollAnimation } from '../hooks/useScrollAnimation';
+import { usePublishedSponsors } from '../hooks/useSponsorDB';
+import sponsor2 from '../assets/sponsors/2.png';
+import sponsor5 from '../assets/sponsors/5.png';
+import sponsor6 from '../assets/sponsors/6.png';
+import sponsorGhanaGas from '../assets/sponsors/Ghanagas1.jpg';
+import sponsor7 from '../assets/sponsors/7.png';
+import sponsor8 from '../assets/sponsors/8.png';
+import sponsor9 from '../assets/sponsors/9.png';
 import './AboutUs.css';
 
 function AboutUs() {
@@ -8,124 +17,153 @@ function AboutUs() {
   const [valuesTitleRef, valuesTitleVisible] = useScrollAnimation();
   const [setValueCardRef, visibleValueCards] = useMultipleScrollAnimation(6);
   const [collaborationTitleRef, collaborationTitleVisible] = useScrollAnimation();
-  const [setCollabRef, visibleCollabs] = useMultipleScrollAnimation(6);
+  const [setCollabRef, visibleCollabs] = useMultipleScrollAnimation(18);
   const [goalsTitleRef, goalsTitleVisible] = useScrollAnimation();
   const [setGoalRef, visibleGoals] = useMultipleScrollAnimation(3);
   const [achievementsTitleRef, achievementsTitleVisible] = useScrollAnimation();
-  const [setAchievementRef, visibleAchievements] = useMultipleScrollAnimation(3);
+  const [setAchievementRef, visibleAchievements] = useMultipleScrollAnimation(4);
   const [sponsorsTitleRef, sponsorsTitleVisible] = useScrollAnimation();
+
+  const dbSponsors = usePublishedSponsors();
+
+  const staticSponsors = [
+    { name: 'Sponsor', image: sponsor6 },
+    { name: 'Sponsor', image: sponsor5 },
+    { name: 'Sponsor', image: sponsor2 },
+    { name: 'Ghana Gas', image: sponsorGhanaGas },
+    { name: 'Sponsor', image: sponsor7 },
+    { name: 'Sponsor', image: sponsor8 },
+    { name: 'Sponsor', image: sponsor9 },
+  ];
+
+  const allSponsors = useMemo(() => {
+    const dynamic = (dbSponsors || []).map(s => ({ name: s.name, image: s.image }));
+    return [...staticSponsors, ...dynamic];
+  }, [dbSponsors]);
 
   const coreValues = [
     {
-      title: 'Compassion',
-      description: 'We approach every individual with empathy and understanding, recognizing the dignity inherent in all people.',
+      title: 'Wellness',
+      description: 'We believe in the importance of comprehensive wellness that encompasses physical, mental, emotional, and social well-being.',
       icon: '💚'
     },
     {
-      title: 'Integrity',
-      description: 'We operate with transparency and accountability in all our programs and use of resources.',
-      icon: '🛡️'
+      title: 'Empowerment',
+      description: 'We empower individuals to take control of their health by providing them with the information and tools they need to make informed decisions.',
+      icon: '💪'
+    },
+    {
+      title: 'Equity',
+      description: 'We advocate for equitable access to wellness resources and services, ensuring that underserved and marginalized communities are not left behind.',
+      icon: '⚖️'
     },
     {
       title: 'Collaboration',
-      description: 'We believe in the power of partnerships with local communities, governments, and other organizations.',
+      description: 'We collaborate with partners, organizations, and communities to create a collective impact on wellness advocacy.',
       icon: '🤝'
     },
     {
-      title: 'Sustainability',
-      description: 'We focus on long-term solutions that communities can maintain and build upon independently.',
-      icon: '🌱'
+      title: 'Education',
+      description: 'We provide educational programs and resources to raise awareness about the importance of wellness and self-care.',
+      icon: '📚'
     },
     {
-      title: 'Innovation',
-      description: 'We continuously seek new and better ways to address health challenges and deliver services.',
+      title: 'Flexibility & Innovation',
+      description: 'Embrace flexibility and innovation in wellness advocacy, adapting to changing needs for effective outcomes.',
       icon: '💡'
-    },
-    {
-      title: 'Excellence',
-      description: 'We strive for the highest standards in healthcare delivery and organizational performance.',
-      icon: '⭐'
     },
   ];
 
   const collaborators = [
-    { name: 'Ghana Health Service', logo: 'GHS' },
-    { name: 'Ministry of Health', logo: 'MOH' },
-    { name: 'World Health Organization', logo: 'WHO' },
-    { name: 'UNICEF Ghana', logo: 'UNICEF' },
-    { name: 'Red Cross Society', logo: 'RCS' },
-    { name: 'Partners in Health', logo: 'PIH' },
+    { name: 'National Youth Authority Ghana', abbr: 'NYA' },
+    { name: 'Ghana Kidney Foundation', abbr: 'GKF' },
+    { name: 'Apinto Government Hospital', abbr: 'AGH' },
+    { name: 'Fiaseman Rural Bank PLC', abbr: 'FRB' },
+    { name: 'National Blood Service', abbr: 'NBS' },
+    { name: 'Drexel University', abbr: 'DU' },
+    { name: 'University Of Pennsylvania', abbr: 'UPenn' },
+    { name: 'New Government Hospital, Bogoso', abbr: 'NGH' },
+    { name: 'Tarkwa Community Hospital', abbr: 'TCH' },
+    { name: 'Precious Minerals Marketing Co.', abbr: 'PMMC' },
+    { name: 'Gold Fields Ghana Foundation', abbr: 'GFGF' },
+    { name: 'Rotary Club of Tarkwa', abbr: 'RC' },
+    { name: 'Bogoso Government Hospital', abbr: 'BGH' },
+    { name: 'Health Spring Pharmacy', abbr: 'HSP' },
+    { name: 'Nephro Ghana Limited', abbr: 'NGL' },
+    { name: 'Mobik Energy', abbr: 'ME' },
+    { name: 'Classic Christken Limited', abbr: 'CCL' },
+    { name: 'Intertek Ghana Limited', abbr: 'IGL' },
   ];
 
   const goals = [
     {
       type: 'Short Term',
-      period: '2026',
+      period: '0-3 Years',
       icon: '🎯',
       color: '#10b981',
       items: [
-        'Expand community health screening programs to 10 additional districts',
-        'Train 200 new community health volunteers',
-        'Launch mobile health clinic services in rural areas',
+        'Increase public awareness in the Tarkwa-Nsuaem municipality and beyond of key public health and wellness issues through radio and social media outreach.',
+        'Engage with local communities through workshops, seminars, and events to educate and empower individuals about wellness practices.',
+        'Establish partnerships with local organizations, healthcare providers, and community leaders to amplify the impact of wellness initiatives.',
+        'Secure short-term funding and resources to support initial advocacy campaigns and wellness programs.',
       ]
     },
     {
-      type: 'Mid Term',
-      period: '2027-2028',
+      type: 'Medium Term',
+      period: '3-6 Years',
       icon: '📈',
       color: '#3b82f6',
       items: [
-        'Establish 5 permanent health centers in underserved regions',
-        'Develop comprehensive maternal and child health programs',
-        'Create sustainable partnerships with 20 local healthcare facilities',
+        'Expand wellness programs to reach a larger and more diverse audience, focusing on both municipal and district communities.',
+        'Enhance organizational capacity by providing training to staff, volunteers, and community members involved in advocacy and wellness initiatives.',
+        'Implement robust monitoring and evaluation systems to assess the effectiveness of programs and advocacy efforts.',
+        'Collaborate with other NGOs, government bodies, and international organizations to address wellness issues comprehensively.',
       ]
     },
     {
       type: 'Long Term',
-      period: '2029-2030',
+      period: '6+ Years',
       icon: '🌟',
       color: '#8b5cf6',
       items: [
-        'Achieve healthcare coverage for 100,000+ beneficiaries annually',
-        'Become a leading health advocacy organization in West Africa',
-        'Establish an endowment fund for sustainable program funding',
+        'Achieve sustainable and long-lasting changes in policies, practices, and societal attitudes towards wellness and mental health.',
+        'Establish the NGO as a key player in national discussions and policies related to wellness and advocacy.',
+        'Contribute to global conversations on wellness by sharing best practices, research findings, and successful advocacy strategies.',
+        'Invest in research initiatives and innovative approaches to continuously improve wellness programs and advocacy strategies.',
+        'Foster a culture of wellness, resilience, and empowerment within communities, promoting long-term positive behavioral changes.',
       ]
     },
   ];
 
   const achievements = [
     {
-      title: 'National Health Screening Campaign 2025',
-      description: 'Successfully conducted free health screenings for over 15,000 individuals across 8 regions, detecting early signs of diabetes, hypertension, and other conditions.',
-      date: 'March - June 2025',
-      impact: '15,000+ screened',
+      title: 'Public Health Radio Education Program',
+      description: 'Broadcasting on Dynamite FM (88.9) under the title "Wapɔwmu dzen yɛ hɛn Dadwen" (Your Health, Our Concern). The program has been running since March 2013 to present, reaching thousands of listeners with vital health information.',
+      date: 'March 2013 - Present',
+      impact: 'Ongoing weekly broadcasts',
+      icon: '📻'
+    },
+    {
+      title: 'Community Health Screenings',
+      description: 'Conducted extensive screening activities for over 15,000 individuals across numerous locations including University of Mines & Technology, Tarkwa, Huni-Valley, Dzodze in Volta Region, Konfoase in Sekondi-Takoradi, Tarkwa Local Prisons, Ampain Refugee Camp, Nzulezu, Atuabo, and Axim.',
+      date: '2013 - 2020',
+      impact: '15,000+ individuals screened',
       icon: '🏥'
     },
     {
-      title: 'Blood Donation Drive Championship',
-      description: 'Organized the largest blood donation drive in Northern Ghana, collecting over 2,500 units of blood and saving countless lives.',
-      date: 'August 2025',
-      impact: '2,500+ units collected',
-      icon: '🩸'
+      title: 'Monthly Health Walk (FIRMWalk)',
+      description: 'A 5-kilometer walking initiative that commenced in May 2016, designed to encourage physical activity, build community connections, and promote healthier lifestyles among residents.',
+      date: 'May 2016 - Present',
+      impact: 'Monthly community engagement',
+      icon: '🚶'
     },
     {
-      title: 'Health Education Radio Series',
-      description: 'Launched a weekly health education program reaching over 500,000 listeners, covering topics from nutrition to disease prevention.',
-      date: 'January 2025 - Present',
-      impact: '500,000+ listeners',
-      icon: '📻'
+      title: 'Annual Blood Donation Exercise',
+      description: 'Initiated in 2022 as part of ongoing community well-being enhancement efforts, organizing blood donation drives to support local blood banks and save lives.',
+      date: '2022 - Present',
+      impact: 'Annual blood drives',
+      icon: '🩸'
     },
-  ];
-
-  const sponsors = [
-    { name: 'Ghana Health Service', logo: 'GHS' },
-    { name: 'Ministry of Health', logo: 'MOH' },
-    { name: 'WHO Ghana', logo: 'WHO' },
-    { name: 'UNICEF Ghana', logo: 'UNICEF' },
-    { name: 'Red Cross Ghana', logo: 'RC' },
-    { name: 'Health Partners International', logo: 'HPI' },
-    { name: 'African Health Foundation', logo: 'AHF' },
-    { name: 'Global Health Initiative', logo: 'GHI' },
   ];
 
   return (
@@ -139,8 +177,8 @@ function AboutUs() {
           <div className="about-hero-overlay"></div>
         </div>
         <div className="about-hero-content">
-          <h1>About Firm Health Foundation</h1>
-          <p>Dedicated to creating a healthier Ghana, one community at a time.</p>
+          <h1>About Firm Health Ghana Foundation</h1>
+          <p>Promoting holistic wellness through advocacy, education, and community engagement.</p>
         </div>
       </section>
 
@@ -152,17 +190,15 @@ function AboutUs() {
         <div className="about-description-content">
           <h2>Who We Are</h2>
           <p>
-            Firm Health Foundation is a non-governmental organization committed to improving healthcare access
-            and promoting wellness in underserved communities across Ghana. Founded in 2015, we have grown
-            from a small group of passionate healthcare advocates to a leading health organization serving
-            thousands of Ghanaians annually.
+            Firm Health Ghana Foundation is committed to promoting holistic wellness through advocacy,
+            education, and community engagement. Our mission is to empower individuals and communities
+            to prioritize their physical, mental, and emotional well-being.
           </p>
           <p>
             Our approach combines direct healthcare services with community education and advocacy. We work
             closely with local communities, healthcare workers, and government agencies to create sustainable
-            health solutions that address the unique challenges faced by each community we serve. Through our
-            various programs, we aim to bridge the healthcare gap and ensure that quality health services
-            reach those who need them most.
+            health solutions. Through our various programs including health screenings, radio education, and
+            community outreach, we aim to ensure that quality health resources reach those who need them most.
           </p>
         </div>
       </section>
@@ -180,9 +216,9 @@ function AboutUs() {
           </div>
           <h2>Our Mission</h2>
           <p>
-            To improve the health and well-being of underserved communities in Ghana by providing accessible
-            healthcare services, education, and sustainable health solutions that empower individuals and
-            families to lead healthier, more productive lives.
+            Firm Health Ghana Foundation is committed to promoting holistic wellness through advocacy,
+            education, and community engagement. Our mission is to empower individuals and communities
+            to prioritize their physical, mental, and emotional well-being.
           </p>
         </div>
         <div
@@ -197,9 +233,8 @@ function AboutUs() {
           </div>
           <h2>Our Vision</h2>
           <p>
-            A Ghana where every person, regardless of their location or economic status, has access to
-            quality healthcare and the knowledge to maintain their well-being. We envision thriving
-            communities where health is a cornerstone of development and prosperity.
+            We envision a world where every person has access to the resources, knowledge, and support
+            they need to lead healthy and fulfilling lives.
           </p>
         </div>
       </section>
@@ -246,9 +281,9 @@ function AboutUs() {
               key={index}
               ref={setCollabRef(index)}
               className={`collaboration-card ${visibleCollabs.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ transitionDelay: `${index * 50}ms` }}
             >
-              <div className="collab-logo">{collab.logo}</div>
+              <div className="collab-logo">{collab.abbr}</div>
               <span className="collab-name">{collab.name}</span>
             </div>
           ))}
@@ -341,9 +376,13 @@ function AboutUs() {
         </h2>
         <div className="sponsors-slider">
           <div className="sponsors-track">
-            {[...sponsors, ...sponsors].map((sponsor, index) => (
+            {[...allSponsors, ...allSponsors].map((sponsor, index) => (
               <div key={index} className="sponsor-item">
-                <div className="sponsor-logo">{sponsor.logo}</div>
+                {sponsor.image ? (
+                  <img src={sponsor.image} alt={sponsor.name} className="sponsor-logo-img" />
+                ) : (
+                  <div className="sponsor-logo">{sponsor.name.substring(0, 3).toUpperCase()}</div>
+                )}
                 <span className="sponsor-name">{sponsor.name}</span>
               </div>
             ))}
