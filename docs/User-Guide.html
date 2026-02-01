@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firm Health Ghana Foundation - Website User Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #1f2937;
+      background: #f9fafb;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #065f46 0%, #059669 50%, #10b981 100%);
+      color: white;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      page-break-after: always;
+    }
+
+    .cover-page h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cover-page .subtitle {
+      font-size: 1.5rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .cover-page .version {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* Table of Contents */
+    .toc {
+      background: #f0fdf4;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      page-break-after: always;
+    }
+
+    .toc h2 {
+      color: #059669;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .toc ul {
+      list-style: none;
+    }
+
+    .toc li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed #d1fae5;
+    }
+
+    .toc li:last-child {
+      border-bottom: none;
+    }
+
+    .toc a {
+      color: #1f2937;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .toc a:hover {
+      color: #059669;
+    }
+
+    .toc .page-num {
+      color: #6b7280;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 3rem;
+      page-break-inside: avoid;
+    }
+
+    h2 {
+      color: #059669;
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #10b981;
+    }
+
+    h3 {
+      color: #1f2937;
+      font-size: 1.25rem;
+      margin: 1.5rem 0 1rem;
+    }
+
+    h4 {
+      color: #374151;
+      font-size: 1.1rem;
+      margin: 1rem 0 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #4b5563;
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: #f0fdf4;
+      border-left: 4px solid #10b981;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .info-box.warning {
+      background: #fef3c7;
+      border-left-color: #f59e0b;
+    }
+
+    .info-box.important {
+      background: #fce7f3;
+      border-left-color: #ec4899;
+    }
+
+    .info-box p {
+      margin: 0;
+    }
+
+    .info-box strong {
+      color: #1f2937;
+    }
+
+    /* Steps */
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding: 0;
+    }
+
+    .steps li {
+      counter-increment: step-counter;
+      position: relative;
+      padding-left: 3.5rem;
+      margin-bottom: 1.5rem;
+      min-height: 2.5rem;
+    }
+
+    .steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .steps li strong {
+      color: #1f2937;
+    }
+
+    /* Screenshots placeholder */
+    .screenshot {
+      background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+      border: 2px dashed #9ca3af;
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 1.5rem 0;
+      color: #6b7280;
+    }
+
+    .screenshot-label {
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+    }
+
+    .screenshot-desc {
+      font-size: 0.875rem;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border: 1px solid #e5e7eb;
+    }
+
+    th {
+      background: #f0fdf4;
+      color: #059669;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    /* Code/Path styling */
+    code {
+      background: #f3f4f6;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #059669;
+    }
+
+    /* Mapping section */
+    .mapping {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #f9fafb;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 0.75rem 0;
+    }
+
+    .mapping-arrow {
+      color: #10b981;
+      font-size: 1.5rem;
+    }
+
+    .mapping-from, .mapping-to {
+      flex: 1;
+      padding: 0.75rem;
+      border-radius: 6px;
+    }
+
+    .mapping-from {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .mapping-to {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .container {
+        box-shadow: none;
+        padding: 0;
+      }
+
+      section {
+        page-break-inside: avoid;
+      }
+
+      .cover-page {
+        page-break-after: always;
+      }
+
+      .toc {
+        page-break-after: always;
+      }
+
+      h2 {
+        page-break-after: avoid;
+      }
+    }
+
+    /* Credentials box */
+    .credentials {
+      background: #1f2937;
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .credentials h4 {
+      color: #10b981;
+      margin-top: 0;
+    }
+
+    .credentials code {
+      background: #374151;
+      color: #10b981;
+    }
+
+    /* Feature list */
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .feature-item {
+      background: #f9fafb;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 3px solid #10b981;
+    }
+
+    .feature-item strong {
+      color: #059669;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Sidebar navigation visual */
+    .sidebar-nav {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .sidebar-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #9ca3af;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-nav-item.active {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+    }
+
+    .sidebar-nav-item .icon {
+      width: 20px;
+      height: 20px;
+      background: currentColor;
+      border-radius: 4px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Cover Page -->
+    <div class="cover-page">
+      <h1>Firm Health Ghana Foundation</h1>
+      <p class="subtitle">Website Administrator User Guide</p>
+      <p class="version">Version 1.0 | January 2026</p>
+      <p style="margin-top: 3rem; opacity: 0.8;">A comprehensive guide to managing your organization's website content through the admin dashboard</p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li><a href="#overview"><span>1. Website Overview</span><span class="page-num">3</span></a></li>
+        <li><a href="#public-pages"><span>2. Public Website Pages</span><span class="page-num">4</span></a></li>
+        <li><a href="#admin-access"><span>3. Accessing the Admin Dashboard</span><span class="page-num">6</span></a></li>
+        <li><a href="#dashboard-overview"><span>4. Dashboard Overview</span><span class="page-num">7</span></a></li>
+        <li><a href="#volunteers"><span>5. Managing Volunteers</span><span class="page-num">9</span></a></li>
+        <li><a href="#blogs"><span>6. Managing Blog Posts</span><span class="page-num">12</span></a></li>
+        <li><a href="#events"><span>7. Managing Events</span><span class="page-num">15</span></a></li>
+        <li><a href="#interventions"><span>8. Managing Interventions</span><span class="page-num">18</span></a></li>
+        <li><a href="#photos"><span>9. Managing Photo Gallery</span><span class="page-num">21</span></a></li>
+        <li><a href="#members"><span>10. Managing Board & Team Members</span><span class="page-num">24</span></a></li>
+        <li><a href="#content-mapping"><span>11. Content Mapping Reference</span><span class="page-num">27</span></a></li>
+        <li><a href="#troubleshooting"><span>12. Troubleshooting & FAQs</span><span class="page-num">29</span></a></li>
+      </ul>
+    </div>
+
+    <!-- Section 1: Overview -->
+    <section id="overview">
+      <h2>1. Website Overview</h2>
+
+      <p>The Firm Health Ghana Foundation website is a modern, responsive web application designed to showcase your organization's mission, programs, and impact. The website consists of two main parts:</p>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <strong>Public Website</strong>
+          The front-facing pages that visitors see, including information about your programs, team, events, and ways to get involved.
+        </div>
+        <div class="feature-item">
+          <strong>Admin Dashboard</strong>
+          A secure, password-protected area where authorized users can manage all website content.
+        </div>
+      </div>
+
+      <h3>Key Features</h3>
+      <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+        <li>Volunteer registration and management</li>
+        <li>Blog publishing system</li>
+        <li>Event management with calendar</li>
+        <li>Intervention programs showcase</li>
+        <li>Photo gallery with categories</li>
+        <li>Board and team member profiles</li>
+        <li>Responsive design for all devices</li>
+      </ul>
+
+      <div class="info-box">
+        <p><strong>Website URL:</strong> <code>https://firm-health-new-website.vercel.app/</code></p>
+      </div>
+    </section>
+
+    <!-- Section 2: Public Pages -->
+    <section id="public-pages">
+      <h2>2. Public Website Pages</h2>
+
+      <p>Understanding the structure of your public website helps you know where your content will appear when you add it through the dashboard.</p>
+
+      <h3>Main Navigation Pages</h3>
+      <table>
+        <tr>
+          <th>Page</th>
+          <th>URL Path</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>Home</strong></td>
+          <td><code>/</code></td>
+          <td>Landing page with hero, impact stats, featured programs</td>
+        </tr>
+        <tr>
+          <td><strong>About Us</strong></td>
+          <td><code>/about</code></td>
+          <td>Organization mission, vision, and values</td>
+        </tr>
+        <tr>
+          <td><strong>Volunteer</strong></td>
+          <td><code>/volunteer</code></td>
+          <td>Volunteer registration form</td>
+        </tr>
+        <tr>
+          <td><strong>Blogs</strong></td>
+          <td><code>/blogs</code></td>
+          <td>List of all published blog posts</td>
+        </tr>
+        <tr>
+          <td><strong>Events</strong></td>
+          <td><code>/events</code></td>
+          <td>Upcoming and past events</td>
+        </tr>
+        <tr>
+          <td><strong>Gallery</strong></td>
+          <td><code>/gallery</code></td>
+          <td>Photo gallery with category filters</td>
+        </tr>
+      </table>
+
+      <h3>Management Section</h3>
+      <table>
+        <tr>
+          <th>Page</th>
+          <th>URL Path</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>Board of Directors</strong></td>
+          <td><code>/management/board</code></td>
+          <td>Board member profiles and biographies</td>
+        </tr>
+        <tr>
+          <td><strong>Management Team</strong></td>
+          <td><code>/management/teams</code></td>
+          <td>Team member profiles and biographies</td>
+        </tr>
+        <tr>
+          <td><strong>Volunteers</strong></td>
+          <td><code>/management/volunteers</code></td>
+          <td>Featured volunteers (those marked to show on website)</td>
+        </tr>
+        <tr>
+          <td><strong>Organogram</strong></td>
+          <td><code>/management/organogram</code></td>
+          <td>Organizational structure chart</td>
+        </tr>
+      </table>
+
+      <h3>Interventions Section</h3>
+      <table>
+        <tr>
+          <th>Page</th>
+          <th>URL Path</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>ICA Programmes</strong></td>
+          <td><code>/interventions/ica-programmes</code></td>
+          <td>ICA training programs information</td>
+        </tr>
+        <tr>
+          <td><strong>Community Interventions</strong></td>
+          <td><code>/interventions/community-interventions</code></td>
+          <td>Community outreach programs</td>
+        </tr>
+        <tr>
+          <td><strong>Blood Donation</strong></td>
+          <td><code>/interventions/blood-donation</code></td>
+          <td>Blood donation campaigns</td>
+        </tr>
+        <tr>
+          <td><strong>Medical Screening</strong></td>
+          <td><code>/interventions/medical-screening</code></td>
+          <td>Health screening initiatives</td>
+        </tr>
+        <tr>
+          <td><strong>Feed The Aged</strong></td>
+          <td><code>/interventions/feed-the-aged</code></td>
+          <td>Elderly support programs</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Section 3: Admin Access -->
+    <section id="admin-access">
+      <h2>3. Accessing the Admin Dashboard</h2>
+
+      <p>The admin dashboard is a secure area where you can manage all content on your website. Only authorized users with the correct credentials can access it.</p>
+
+      <h3>How to Access the Dashboard</h3>
+
+      <ol class="steps">
+        <li>
+          <strong>Open your web browser</strong><br>
+          Use any modern browser like Chrome, Firefox, Safari, or Edge.
+        </li>
+        <li>
+          <strong>Navigate to the admin login page</strong><br>
+          Go to: <code>https://firm-health-new-website.vercel.app/admin</code>
+        </li>
+        <li>
+          <strong>Enter your login credentials</strong><br>
+          Type your username and password in the login form.
+        </li>
+        <li>
+          <strong>Click the "Login" button</strong><br>
+          You will be redirected to the dashboard if your credentials are correct.
+        </li>
+      </ol>
+
+      <div class="credentials">
+        <h4>Default Login Credentials</h4>
+        <p style="margin-bottom: 0.5rem;"><strong>Username:</strong> <code>admin</code></p>
+        <p style="margin-bottom: 0;"><strong>Password:</strong> <code>admin123</code></p>
+      </div>
+
+      <div class="info-box warning">
+        <p><strong>Security Tip:</strong> It is recommended to change these default credentials in production. Contact your developer to update the login credentials for better security.</p>
+      </div>
+
+      <div class="screenshot">
+        <p class="screenshot-label">Admin Login Page</p>
+        <p class="screenshot-desc">A simple login form with username and password fields, centered on the page with the Firm Health logo above.</p>
+      </div>
+    </section>
+
+    <!-- Section 4: Dashboard Overview -->
+    <section id="dashboard-overview">
+      <h2>4. Dashboard Overview</h2>
+
+      <p>Once logged in, you'll see the admin dashboard. The dashboard has a sidebar navigation on the left and the main content area on the right.</p>
+
+      <h3>Sidebar Navigation</h3>
+      <p>The sidebar contains links to all management sections:</p>
+
+      <div class="sidebar-nav">
+        <div class="sidebar-nav-item active">
+          <div class="icon"></div>
+          <span>Dashboard</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <div class="icon"></div>
+          <span>Volunteer Management</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <div class="icon"></div>
+          <span>Blog Management</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <div class="icon"></div>
+          <span>Event Management</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <div class="icon"></div>
+          <span>Interventions</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <div class="icon"></div>
+          <span>Photo Gallery</span>
+        </div>
+        <div class="sidebar-nav-item">
+          <div class="icon"></div>
+          <span>Board & Team</span>
+        </div>
+      </div>
+
+      <h3>Dashboard Home</h3>
+      <p>The main dashboard page shows an overview with quick statistics:</p>
+      <ul style="margin-left: 1.5rem;">
+        <li>Total number of registered volunteers</li>
+        <li>Number of published blog posts</li>
+        <li>Upcoming events count</li>
+        <li>Active interventions</li>
+        <li>Photos in gallery</li>
+      </ul>
+
+      <h3>Collapsible Sidebar</h3>
+      <p>You can collapse the sidebar by clicking the arrow button at the top right of the sidebar. This gives you more space for the content area. Click again to expand.</p>
+
+      <h3>Logging Out</h3>
+      <p>To log out of the dashboard, click the <strong>Logout</strong> button at the bottom of the sidebar. You will be redirected to the login page.</p>
+    </section>
+
+    <!-- Section 5: Managing Volunteers -->
+    <section id="volunteers">
+      <h2>5. Managing Volunteers</h2>
+
+      <p>The Volunteer Management section allows you to view, manage, and feature volunteers who have signed up through the website.</p>
+
+      <h3>Accessing Volunteer Management</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Volunteer Management" in the sidebar</strong><br>
+          This opens the volunteer management page.
+        </li>
+      </ol>
+
+      <h3>Volunteer List View</h3>
+      <p>You'll see a grid of volunteer cards showing:</p>
+      <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+        <li>Profile photo (or placeholder with initials)</li>
+        <li>Name and email</li>
+        <li>Registration date</li>
+        <li>Skills and availability</li>
+        <li>Status (Active, Pending, Inactive)</li>
+      </ul>
+
+      <h3>Viewing Volunteer Details</h3>
+      <ol class="steps">
+        <li>
+          <strong>Find the volunteer card</strong><br>
+          Scroll through the grid to find the volunteer you want to view.
+        </li>
+        <li>
+          <strong>Click "View Details"</strong><br>
+          A modal will open showing the volunteer's complete information including their biography and skills.
+        </li>
+      </ol>
+
+      <h3>Featuring a Volunteer on the Website</h3>
+      <p>You can choose to display certain volunteers on the public website's volunteer page.</p>
+
+      <ol class="steps">
+        <li>
+          <strong>Find the volunteer card</strong><br>
+          Locate the volunteer you want to feature.
+        </li>
+        <li>
+          <strong>Click "Show on Website" toggle</strong><br>
+          When enabled (green), the volunteer will appear on the public Volunteers page.
+        </li>
+      </ol>
+
+      <div class="info-box">
+        <p><strong>Where it appears:</strong> Featured volunteers are displayed at <code>/management/volunteers</code> on the public website.</p>
+      </div>
+
+      <h3>Editing Volunteer Information</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click the "Edit" button on the volunteer card</strong><br>
+          This opens the edit form.
+        </li>
+        <li>
+          <strong>Modify the information</strong><br>
+          Update name, email, skills, biography, or upload a new photo.
+        </li>
+        <li>
+          <strong>Click "Save Changes"</strong><br>
+          Your changes will be saved and reflected immediately.
+        </li>
+      </ol>
+
+      <h3>Changing Volunteer Status</h3>
+      <p>Volunteers can have three statuses:</p>
+      <table>
+        <tr>
+          <th>Status</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>Active</strong></td>
+          <td>Currently participating volunteers</td>
+        </tr>
+        <tr>
+          <td><strong>Pending</strong></td>
+          <td>New signups awaiting approval</td>
+        </tr>
+        <tr>
+          <td><strong>Inactive</strong></td>
+          <td>Former or paused volunteers</td>
+        </tr>
+      </table>
+
+      <h3>Deleting a Volunteer</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click the "Delete" button</strong><br>
+          A confirmation prompt will appear.
+        </li>
+        <li>
+          <strong>Confirm the deletion</strong><br>
+          Click "Confirm Delete" to permanently remove the volunteer.
+        </li>
+      </ol>
+
+      <div class="info-box warning">
+        <p><strong>Warning:</strong> Deleting a volunteer is permanent and cannot be undone.</p>
+      </div>
+    </section>
+
+    <!-- Section 6: Managing Blogs -->
+    <section id="blogs">
+      <h2>6. Managing Blog Posts</h2>
+
+      <p>The Blog Management section allows you to create, edit, and publish blog posts that appear on your website.</p>
+
+      <h3>Accessing Blog Management</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Blog Management" in the sidebar</strong><br>
+          This opens the blog management page.
+        </li>
+      </ol>
+
+      <h3>Creating a New Blog Post</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click the "Create New Post" button</strong><br>
+          A form will appear for creating a new blog post.
+        </li>
+        <li>
+          <strong>Enter the blog title</strong><br>
+          This will be the headline displayed on the blog listing and detail pages.
+        </li>
+        <li>
+          <strong>Add a featured image</strong><br>
+          Click the upload area to select an image from your computer. This image appears at the top of the blog post.
+        </li>
+        <li>
+          <strong>Write the blog content</strong><br>
+          Enter the main body of your blog post in the content area.
+        </li>
+        <li>
+          <strong>Add an excerpt (optional)</strong><br>
+          This short summary appears on the blog listing page.
+        </li>
+        <li>
+          <strong>Choose publish status</strong><br>
+          Check "Published" to make it visible on the website, or leave unchecked to save as a draft.
+        </li>
+        <li>
+          <strong>Click "Save Post"</strong><br>
+          Your blog post will be saved.
+        </li>
+      </ol>
+
+      <div class="info-box">
+        <p><strong>Where it appears:</strong> Published blog posts appear at <code>/blogs</code> and individual posts at <code>/blog/[post-slug]</code></p>
+      </div>
+
+      <h3>Editing an Existing Blog Post</h3>
+      <ol class="steps">
+        <li>
+          <strong>Find the blog post in the list</strong><br>
+          Posts are displayed as cards with the title and featured image.
+        </li>
+        <li>
+          <strong>Click the "Edit" button</strong><br>
+          The edit form will open with the current content.
+        </li>
+        <li>
+          <strong>Make your changes</strong><br>
+          Update the title, content, image, or publish status.
+        </li>
+        <li>
+          <strong>Click "Save Changes"</strong><br>
+          Your updates will be saved and reflected on the website.
+        </li>
+      </ol>
+
+      <h3>Publishing and Unpublishing</h3>
+      <p>You can control whether a blog post is visible to the public:</p>
+      <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+        <li><strong>Published:</strong> Visible on the public website</li>
+        <li><strong>Draft:</strong> Only visible in the admin dashboard</li>
+      </ul>
+
+      <p>Toggle the "Published" checkbox to change the status.</p>
+
+      <h3>Deleting a Blog Post</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click the "Delete" button on the blog card</strong><br>
+          A confirmation prompt will appear.
+        </li>
+        <li>
+          <strong>Confirm the deletion</strong><br>
+          The post will be permanently removed.
+        </li>
+      </ol>
+    </section>
+
+    <!-- Section 7: Managing Events -->
+    <section id="events">
+      <h2>7. Managing Events</h2>
+
+      <p>The Event Management section allows you to create and manage events that will be displayed on your website's events page.</p>
+
+      <h3>Accessing Event Management</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Event Management" in the sidebar</strong><br>
+          This opens the event management page.
+        </li>
+      </ol>
+
+      <h3>Creating a New Event</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Create New Event"</strong><br>
+          The event creation form will appear.
+        </li>
+        <li>
+          <strong>Enter event details:</strong>
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li><strong>Title:</strong> Name of the event</li>
+            <li><strong>Date:</strong> When the event will take place</li>
+            <li><strong>Time:</strong> Start time of the event</li>
+            <li><strong>Location:</strong> Where the event will be held</li>
+            <li><strong>Type:</strong> Category (e.g., Health Screening, Blood Donation, Community Outreach)</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Add an event image</strong><br>
+          Upload a promotional image for the event.
+        </li>
+        <li>
+          <strong>Write the event description</strong><br>
+          Provide details about what attendees can expect.
+        </li>
+        <li>
+          <strong>Set the publish status</strong><br>
+          Check "Published" to make it visible on the website.
+        </li>
+        <li>
+          <strong>Click "Save Event"</strong><br>
+          Your event will be created.
+        </li>
+      </ol>
+
+      <div class="info-box">
+        <p><strong>Where it appears:</strong> Published events appear at <code>/events</code> on the public website.</p>
+      </div>
+
+      <h3>Event Types</h3>
+      <p>Events are categorized by type for easy filtering:</p>
+      <table>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>Health Screening</td>
+          <td>Medical checkup and screening events</td>
+        </tr>
+        <tr>
+          <td>Blood Donation</td>
+          <td>Blood donation drives</td>
+        </tr>
+        <tr>
+          <td>Community Outreach</td>
+          <td>Community engagement activities</td>
+        </tr>
+        <tr>
+          <td>Training</td>
+          <td>Educational and training sessions</td>
+        </tr>
+        <tr>
+          <td>Fundraising</td>
+          <td>Fundraising events</td>
+        </tr>
+      </table>
+
+      <h3>Editing Events</h3>
+      <ol class="steps">
+        <li>
+          <strong>Find the event card</strong><br>
+          Events are displayed with their date, title, and image.
+        </li>
+        <li>
+          <strong>Click "Edit"</strong><br>
+          Make your changes to any field.
+        </li>
+        <li>
+          <strong>Save your changes</strong><br>
+          Click "Save Event" to update.
+        </li>
+      </ol>
+
+      <h3>Upcoming vs Past Events</h3>
+      <p>The website automatically categorizes events based on their date:</p>
+      <ul style="margin-left: 1.5rem;">
+        <li><strong>Upcoming Events:</strong> Events with dates in the future</li>
+        <li><strong>Past Events:</strong> Events with dates that have passed</li>
+      </ul>
+    </section>
+
+    <!-- Section 8: Managing Interventions -->
+    <section id="interventions">
+      <h2>8. Managing Interventions</h2>
+
+      <p>The Interventions section allows you to showcase your organization's programs and initiatives.</p>
+
+      <h3>Accessing Interventions Management</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Interventions" in the sidebar</strong><br>
+          This opens the interventions management page.
+        </li>
+      </ol>
+
+      <h3>Creating a New Intervention</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Create New Intervention"</strong><br>
+          The creation form will appear.
+        </li>
+        <li>
+          <strong>Enter intervention details:</strong>
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li><strong>Title:</strong> Name of the intervention/program</li>
+            <li><strong>Slug:</strong> URL-friendly identifier (auto-generated from title)</li>
+            <li><strong>Featured Image:</strong> Main image for the program</li>
+            <li><strong>Short Description:</strong> Brief overview shown in listings</li>
+            <li><strong>Full Description:</strong> Detailed information about the program</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Add objectives and impact</strong><br>
+          Describe the goals and outcomes of the intervention.
+        </li>
+        <li>
+          <strong>Set display order</strong><br>
+          Choose the order in which this intervention appears relative to others.
+        </li>
+        <li>
+          <strong>Publish the intervention</strong><br>
+          Check "Published" to make it visible.
+        </li>
+        <li>
+          <strong>Click "Save"</strong><br>
+          Your intervention will be created.
+        </li>
+      </ol>
+
+      <div class="info-box">
+        <p><strong>Where it appears:</strong> Published interventions appear at <code>/interventions/[slug]</code> on the public website.</p>
+      </div>
+
+      <h3>Static vs Dynamic Interventions</h3>
+      <p>The website has some pre-built intervention pages (like ICA Programmes, Blood Donation, etc.) and also supports dynamic interventions that you create through the dashboard.</p>
+
+      <table>
+        <tr>
+          <th>Static Pages</th>
+          <th>Dynamic Pages</th>
+        </tr>
+        <tr>
+          <td>Pre-designed with specific layouts</td>
+          <td>Created through the dashboard</td>
+        </tr>
+        <tr>
+          <td>ICA Programmes, Blood Donation, Medical Screening, Feed The Aged</td>
+          <td>Any new intervention you create</td>
+        </tr>
+        <tr>
+          <td>Content is fixed in code</td>
+          <td>Content is fully editable</td>
+        </tr>
+      </table>
+
+      <h3>Reordering Interventions</h3>
+      <p>Use the "Order" field to control the display sequence of interventions. Lower numbers appear first.</p>
+    </section>
+
+    <!-- Section 9: Managing Photos -->
+    <section id="photos">
+      <h2>9. Managing Photo Gallery</h2>
+
+      <p>The Photo Gallery section allows you to upload and organize photos that appear in the website's gallery.</p>
+
+      <h3>Accessing Photo Management</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Photo Gallery" in the sidebar</strong><br>
+          This opens the photo management page.
+        </li>
+      </ol>
+
+      <h3>Adding New Photos</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Add New Photo"</strong><br>
+          The upload form will appear.
+        </li>
+        <li>
+          <strong>Upload the image</strong><br>
+          Click the upload area to select an image from your computer.
+        </li>
+        <li>
+          <strong>Enter photo details:</strong>
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li><strong>Title:</strong> Name or caption for the photo</li>
+            <li><strong>Category:</strong> Choose a category for filtering</li>
+            <li><strong>Description:</strong> Optional description</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Set publish status</strong><br>
+          Check "Published" to make it visible in the gallery.
+        </li>
+        <li>
+          <strong>Click "Save Photo"</strong><br>
+          Your photo will be added to the gallery.
+        </li>
+      </ol>
+
+      <div class="info-box">
+        <p><strong>Where it appears:</strong> Published photos appear at <code>/gallery</code> on the public website.</p>
+      </div>
+
+      <h3>Photo Categories</h3>
+      <p>Photos are organized into categories that visitors can use to filter the gallery:</p>
+      <table>
+        <tr>
+          <th>Category</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>Events</td>
+          <td>Photos from events and activities</td>
+        </tr>
+        <tr>
+          <td>Community</td>
+          <td>Community outreach and engagement</td>
+        </tr>
+        <tr>
+          <td>Medical</td>
+          <td>Medical screenings and health services</td>
+        </tr>
+        <tr>
+          <td>Team</td>
+          <td>Team and volunteer photos</td>
+        </tr>
+        <tr>
+          <td>Other</td>
+          <td>Miscellaneous photos</td>
+        </tr>
+      </table>
+
+      <h3>Gallery Features on Public Site</h3>
+      <p>The public gallery includes:</p>
+      <ul style="margin-left: 1.5rem;">
+        <li>Category filter buttons</li>
+        <li>Grid layout of photos</li>
+        <li>Lightbox view when clicking on a photo</li>
+        <li>Navigation between photos in lightbox</li>
+      </ul>
+
+      <h3>Editing Photo Details</h3>
+      <ol class="steps">
+        <li>
+          <strong>Find the photo in the admin grid</strong><br>
+          Photos are displayed with thumbnails.
+        </li>
+        <li>
+          <strong>Click "Edit"</strong><br>
+          Modify the title, category, or description.
+        </li>
+        <li>
+          <strong>Save your changes</strong><br>
+          Click "Save" to update.
+        </li>
+      </ol>
+
+      <h3>Deleting Photos</h3>
+      <p>Click the "Delete" button on a photo card and confirm to permanently remove it from the gallery.</p>
+    </section>
+
+    <!-- Section 10: Managing Board & Team -->
+    <section id="members">
+      <h2>10. Managing Board & Team Members</h2>
+
+      <p>The Board & Team section allows you to manage the profiles of your organization's board of directors and management team.</p>
+
+      <h3>Accessing Member Management</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Board & Team" in the sidebar</strong><br>
+          This opens the member management page.
+        </li>
+      </ol>
+
+      <h3>Understanding the Tabs</h3>
+      <p>The page has two tabs:</p>
+      <table>
+        <tr>
+          <th>Tab</th>
+          <th>Description</th>
+          <th>Displays On</th>
+        </tr>
+        <tr>
+          <td><strong>Board Members</strong></td>
+          <td>Members of the Board of Directors</td>
+          <td><code>/management/board</code></td>
+        </tr>
+        <tr>
+          <td><strong>Team Members</strong></td>
+          <td>Management team staff</td>
+          <td><code>/management/teams</code></td>
+        </tr>
+      </table>
+
+      <h3>Adding a New Member</h3>
+      <ol class="steps">
+        <li>
+          <strong>Select the appropriate tab</strong><br>
+          Choose "Board Members" or "Team Members" depending on which category the person belongs to.
+        </li>
+        <li>
+          <strong>Click "Add New Member"</strong><br>
+          The member form will appear.
+        </li>
+        <li>
+          <strong>Fill in the member details:</strong>
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li><strong>Name:</strong> Full name of the member</li>
+            <li><strong>Email:</strong> Contact email address</li>
+            <li><strong>Role:</strong> Their title (e.g., "Chairman", "Executive Director")</li>
+            <li><strong>Position:</strong> Additional position info (e.g., "Medical Doctor")</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Upload a profile photo</strong><br>
+          Click the upload area to add their photo.
+        </li>
+        <li>
+          <strong>Add biography information:</strong>
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li><strong>Short Bio:</strong> Brief description shown on the card</li>
+            <li><strong>Full Bio:</strong> Complete biography shown in the modal</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Set publish status</strong><br>
+          Check "Published" to display this member on the website.
+        </li>
+        <li>
+          <strong>Click "Save Member"</strong><br>
+          The member will be added.
+        </li>
+      </ol>
+
+      <div class="screenshot">
+        <p class="screenshot-label">Add Member Form</p>
+        <p class="screenshot-desc">Form with fields for name, email, role, position, photo upload, short bio, and full bio. A "Published" checkbox at the bottom controls visibility.</p>
+      </div>
+
+      <div class="info-box">
+        <p><strong>Where it appears:</strong></p>
+        <ul style="margin-top: 0.5rem; margin-left: 1rem;">
+          <li>Board Members → <code>/management/board</code></li>
+          <li>Team Members → <code>/management/teams</code></li>
+        </ul>
+      </div>
+
+      <h3>How Members Display on the Website</h3>
+      <p>On the public website, members are displayed as cards showing:</p>
+      <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+        <li>Profile photo (or placeholder if none uploaded)</li>
+        <li>Name and role</li>
+        <li>Position</li>
+        <li>Email (clickable)</li>
+        <li>Short bio</li>
+        <li>"See Biography" button that opens a modal with the full bio</li>
+      </ul>
+
+      <h3>Editing a Member</h3>
+      <ol class="steps">
+        <li>
+          <strong>Find the member card</strong><br>
+          Locate the member you want to edit.
+        </li>
+        <li>
+          <strong>Click "Edit"</strong><br>
+          The form will open with their current information.
+        </li>
+        <li>
+          <strong>Make your changes</strong><br>
+          Update any fields as needed.
+        </li>
+        <li>
+          <strong>Click "Save Changes"</strong><br>
+          Your updates will be saved.
+        </li>
+      </ol>
+
+      <h3>Publishing and Unpublishing Members</h3>
+      <p>Use the "Toggle Publish" button to control visibility:</p>
+      <ul style="margin-left: 1.5rem;">
+        <li><strong>Published:</strong> Member appears on the public website</li>
+        <li><strong>Draft:</strong> Member is hidden from the public site but remains in the dashboard</li>
+      </ul>
+
+      <h3>Deleting a Member</h3>
+      <ol class="steps">
+        <li>
+          <strong>Click "Delete" on the member card</strong><br>
+          A confirmation button will appear.
+        </li>
+        <li>
+          <strong>Click "Confirm Delete"</strong><br>
+          The member will be permanently removed.
+        </li>
+      </ol>
+    </section>
+
+    <!-- Section 11: Content Mapping -->
+    <section id="content-mapping">
+      <h2>11. Content Mapping Reference</h2>
+
+      <p>This section provides a quick reference showing where content you add in the dashboard appears on the public website.</p>
+
+      <h3>Complete Content Mapping</h3>
+
+      <div class="mapping">
+        <div class="mapping-from"><strong>Admin:</strong> Volunteer Management</div>
+        <span class="mapping-arrow">→</span>
+        <div class="mapping-to"><strong>Public:</strong> /management/volunteers</div>
+      </div>
+
+      <div class="mapping">
+        <div class="mapping-from"><strong>Admin:</strong> Blog Management</div>
+        <span class="mapping-arrow">→</span>
+        <div class="mapping-to"><strong>Public:</strong> /blogs & /blog/[slug]</div>
+      </div>
+
+      <div class="mapping">
+        <div class="mapping-from"><strong>Admin:</strong> Event Management</div>
+        <span class="mapping-arrow">→</span>
+        <div class="mapping-to"><strong>Public:</strong> /events</div>
+      </div>
+
+      <div class="mapping">
+        <div class="mapping-from"><strong>Admin:</strong> Interventions</div>
+        <span class="mapping-arrow">→</span>
+        <div class="mapping-to"><strong>Public:</strong> /interventions/[slug]</div>
+      </div>
+
+      <div class="mapping">
+        <div class="mapping-from"><strong>Admin:</strong> Photo Gallery</div>
+        <span class="mapping-arrow">→</span>
+        <div class="mapping-to"><strong>Public:</strong> /gallery</div>
+      </div>
+
+      <div class="mapping">
+        <div class="mapping-from"><strong>Admin:</strong> Board Members</div>
+        <span class="mapping-arrow">→</span>
+        <div class="mapping-to"><strong>Public:</strong> /management/board</div>
+      </div>
+
+      <div class="mapping">
+        <div class="mapping-from"><strong>Admin:</strong> Team Members</div>
+        <span class="mapping-arrow">→</span>
+        <div class="mapping-to"><strong>Public:</strong> /management/teams</div>
+      </div>
+
+      <h3>Visibility Rules</h3>
+      <table>
+        <tr>
+          <th>Content Type</th>
+          <th>Visibility Control</th>
+        </tr>
+        <tr>
+          <td>Volunteers</td>
+          <td>"Show on Website" toggle</td>
+        </tr>
+        <tr>
+          <td>Blogs</td>
+          <td>"Published" checkbox</td>
+        </tr>
+        <tr>
+          <td>Events</td>
+          <td>"Published" checkbox</td>
+        </tr>
+        <tr>
+          <td>Interventions</td>
+          <td>"Published" checkbox</td>
+        </tr>
+        <tr>
+          <td>Photos</td>
+          <td>"Published" checkbox</td>
+        </tr>
+        <tr>
+          <td>Members</td>
+          <td>"Published" checkbox / Toggle button</td>
+        </tr>
+      </table>
+
+      <div class="info-box">
+        <p><strong>Remember:</strong> Only content marked as "Published" or with "Show on Website" enabled will appear on the public website. Draft content is only visible in the admin dashboard.</p>
+      </div>
+    </section>
+
+    <!-- Section 12: Troubleshooting -->
+    <section id="troubleshooting">
+      <h2>12. Troubleshooting & FAQs</h2>
+
+      <h3>Common Issues and Solutions</h3>
+
+      <h4>Q: I can't log in to the admin dashboard</h4>
+      <p><strong>A:</strong> Make sure you're using the correct credentials (username: <code>admin</code>, password: <code>admin123</code>). Check that Caps Lock is not enabled. If you've changed the password and forgotten it, contact your developer.</p>
+
+      <h4>Q: I added content but it's not showing on the website</h4>
+      <p><strong>A:</strong> Make sure the content is marked as "Published". Only published content appears on the public website. Check the publish status checkbox when editing the item.</p>
+
+      <h4>Q: Images are not uploading</h4>
+      <p><strong>A:</strong> Ensure your image file is in a supported format (JPG, PNG, GIF, WebP). Try reducing the file size if it's very large. Clear your browser cache and try again.</p>
+
+      <h4>Q: The page shows "No items found"</h4>
+      <p><strong>A:</strong> This means no content has been added yet, or all content is set to draft/unpublished. Add new content or publish existing drafts.</p>
+
+      <h4>Q: Changes are not reflecting immediately</h4>
+      <p><strong>A:</strong> Try refreshing the page (Ctrl+F5 or Cmd+Shift+R). If using a CDN or caching, changes may take a few minutes to propagate.</p>
+
+      <h4>Q: I accidentally deleted something</h4>
+      <p><strong>A:</strong> Unfortunately, deletions are permanent. Always double-check before confirming a deletion. Consider keeping backups of important content.</p>
+
+      <h3>Best Practices</h3>
+      <ul style="margin-left: 1.5rem;">
+        <li><strong>Use high-quality images:</strong> Photos should be clear and well-lit. Recommended minimum size is 800x600 pixels.</li>
+        <li><strong>Write descriptive titles:</strong> Clear titles help visitors understand the content at a glance.</li>
+        <li><strong>Keep content updated:</strong> Regularly update events, remove outdated content, and add new blog posts to keep the site fresh.</li>
+        <li><strong>Preview before publishing:</strong> After publishing, visit the public page to verify everything looks correct.</li>
+        <li><strong>Organize photos by category:</strong> Use appropriate categories for photos to help visitors filter the gallery.</li>
+      </ul>
+
+      <h3>Getting Help</h3>
+      <p>If you encounter issues not covered in this guide:</p>
+      <ol style="margin-left: 1.5rem;">
+        <li>Check if the issue is covered in this documentation</li>
+        <li>Try refreshing the page or clearing browser cache</li>
+        <li>Contact your website developer for technical support</li>
+      </ol>
+
+      <div class="info-box">
+        <p><strong>Technical Support Contact:</strong> For technical issues, please contact your web developer with a detailed description of the problem, including any error messages you see.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; color: #6b7280;">
+      <p><strong>Firm Health Ghana Foundation</strong></p>
+      <p>Website User Guide v1.0</p>
+      <p style="font-size: 0.875rem; margin-top: 1rem;">© 2026 Firm Health Ghana Foundation. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
