@@ -1,9 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useScrollAnimation, useMultipleScrollAnimation } from '../hooks/useScrollAnimation';
 import { usePublishedInterventions } from '../hooks/useInterventionDB';
 import { useUpcomingEvents } from '../hooks/useEventDB';
 import { usePublishedPhotos } from '../hooks/usePhotoDB';
+import { usePublishedSponsors } from '../hooks/useSponsorDB';
+import sponsor2 from '../assets/sponsors/2.png';
+import sponsor5 from '../assets/sponsors/5.png';
+import sponsor6 from '../assets/sponsors/6.png';
+import sponsorGhanaGas from '../assets/sponsors/Ghanagas1.jpg';
+import sponsor7 from '../assets/sponsors/7.png';
+import sponsor8 from '../assets/sponsors/8.png';
+import sponsor9 from '../assets/sponsors/9.png';
 import './HomePage.css';
 
 function HomePage() {
@@ -36,16 +44,22 @@ function HomePage() {
     logo: '/intertek-logo.png'
   };
 
-  const sponsors = [
-    { name: 'Ghana Health Service', logo: 'GHS' },
-    { name: 'Ministry of Health', logo: 'MOH' },
-    { name: 'WHO Ghana', logo: 'WHO' },
-    { name: 'UNICEF Ghana', logo: 'UNICEF' },
-    { name: 'Red Cross Ghana', logo: 'RC' },
-    { name: 'Health Partners International', logo: 'HPI' },
-    { name: 'African Health Foundation', logo: 'AHF' },
-    { name: 'Global Health Initiative', logo: 'GHI' },
+  const dbSponsors = usePublishedSponsors();
+
+  const staticSponsors = [
+    { name: 'Sponsor', image: sponsor6 },
+    { name: 'Sponsor', image: sponsor5 },
+    { name: 'Sponsor', image: sponsor2 },
+    { name: 'Ghana Gas', image: sponsorGhanaGas },
+    { name: 'Sponsor', image: sponsor7 },
+    { name: 'Sponsor', image: sponsor8 },
+    { name: 'Sponsor', image: sponsor9 },
   ];
+
+  const allSponsors = useMemo(() => {
+    const dynamic = (dbSponsors || []).map(s => ({ name: s.name, image: s.image, website: s.website }));
+    return [...staticSponsors, ...dynamic];
+  }, [dbSponsors]);
 
   // Handle body overflow when lightbox opens/closes
   useEffect(() => {
@@ -374,9 +388,13 @@ function HomePage() {
         </h2>
         <div className="sponsors-slider">
           <div className="sponsors-track">
-            {[...sponsors, ...sponsors].map((sponsor, index) => (
+            {[...allSponsors, ...allSponsors].map((sponsor, index) => (
               <div key={index} className="sponsor-item">
-                <div className="sponsor-logo">{sponsor.logo}</div>
+                {sponsor.image ? (
+                  <img src={sponsor.image} alt={sponsor.name} className="sponsor-logo-img" />
+                ) : (
+                  <div className="sponsor-logo">{sponsor.name.substring(0, 3).toUpperCase()}</div>
+                )}
                 <span className="sponsor-name">{sponsor.name}</span>
               </div>
             ))}
