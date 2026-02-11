@@ -30,7 +30,48 @@ function HomePage() {
   const [currentImage, setCurrentImage] = useState(0);
 
   const dbInterventions = usePublishedInterventions();
-  const [setInterventionRef, visibleInterventions] = useMultipleScrollAnimation(dbInterventions?.length || 5);
+
+  const staticInterventions = [
+    {
+      id: 'static-1',
+      title: 'ICA Programmes',
+      slug: 'ica-programmes',
+      description: 'A 9-day integrated volunteer programme combining health screening, maternal & child health, medical outreach, and community health worker training in underserved communities.',
+      color: '#10b981',
+    },
+    {
+      id: 'static-2',
+      title: 'Community Medical Screening',
+      slug: 'medical-screening',
+      description: 'Free health screenings bringing preventive healthcare directly to communities, with over 13,000 individuals screened across 20+ communities for blood pressure, blood sugar, vision, and more.',
+      color: '#3b82f6',
+    },
+    {
+      id: 'static-3',
+      title: 'Quarterly Blood Donation Drive',
+      slug: 'blood-donation',
+      description: 'Saving lives one donation at a time through regular community blood donation drives, addressing the critical shortage of blood supplies in local healthcare facilities.',
+      color: '#ef4444',
+    },
+    {
+      id: 'static-4',
+      title: 'Feed the Aged & Medical Outreach',
+      slug: 'feed-the-aged',
+      description: 'Honoring our elders through nutrition, care, and comprehensive medical support — ensuring elderly community members receive nutritious meals and health monitoring.',
+      color: '#f59e0b',
+    },
+    {
+      id: 'static-5',
+      title: 'Community Interventions',
+      slug: 'community-interventions',
+      description: 'Transforming lives through diverse health and wellness initiatives including weekly public health radio programmes, health walks, and community awareness campaigns across Ghana.',
+      color: '#8b5cf6',
+    }
+  ];
+
+  const interventions = dbInterventions && dbInterventions.length > 0 ? dbInterventions : staticInterventions;
+  const [setInterventionRef, visibleInterventions] = useMultipleScrollAnimation(interventions.length);
+
 
   const dbEvents = useUpcomingEvents();
   const [setEventRef, visibleEvents] = useMultipleScrollAnimation(dbEvents?.length || 3);
@@ -180,6 +221,7 @@ function HomePage() {
         </div>
       </section>
 
+
       {/* Interventions Section */}
       <section className="interventions-section">
         <h2
@@ -189,47 +231,35 @@ function HomePage() {
           Our Interventions
         </h2>
         <p className="section-subtitle">Transforming lives through comprehensive health and wellness initiatives across Ghana.</p>
-        {dbInterventions && dbInterventions.length > 0 ? (
-          <div className="interventions-grid">
-            {dbInterventions.map((intervention, index) => (
-              <div
-                key={intervention.id}
-                ref={setInterventionRef(index)}
-                className={`intervention-card ${visibleInterventions.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="intervention-image">
-                  {intervention.image ? (
-                    <img src={intervention.image} alt={intervention.title} />
-                  ) : (
-                    <div className="intervention-placeholder" style={{ backgroundColor: intervention.color || '#10b981' }}></div>
-                  )}
-                  <div className="intervention-overlay" style={{ background: `linear-gradient(135deg, ${intervention.color || '#10b981'}dd 0%, ${intervention.color || '#10b981'}99 100%)` }}></div>
-                </div>
-                <div className="intervention-content">
-                  <h3>{intervention.title}</h3>
-                  <p>{intervention.description}</p>
-                  <Link to={`/interventions/${intervention.slug}`} className="intervention-btn" style={{ backgroundColor: intervention.color || '#10b981' }}>
-                    Learn More
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </Link>
-                </div>
+        <div className="interventions-grid">
+          {interventions.map((intervention, index) => (
+            <div
+              key={intervention.id}
+              ref={setInterventionRef(index)}
+              className={`intervention-card ${visibleInterventions.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <div className="intervention-image">
+                {intervention.image ? (
+                  <img src={intervention.image} alt={intervention.title} />
+                ) : (
+                  <div className="intervention-placeholder" style={{ backgroundColor: intervention.color || '#10b981' }}></div>
+                )}
+                <div className="intervention-overlay" style={{ background: `linear-gradient(135deg, ${intervention.color || '#10b981'}dd 0%, ${intervention.color || '#10b981'}99 100%)` }}></div>
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="empty-state-card">
-            <div className="empty-state-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-              </svg>
+              <div className="intervention-content">
+                <h3>{intervention.title}</h3>
+                <p>{intervention.description}</p>
+                <Link to={`/interventions/${intervention.slug}`} className="intervention-btn" style={{ backgroundColor: intervention.color || '#10b981' }}>
+                  Learn More
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </Link>
+              </div>
             </div>
-            <h3>No Interventions Added Yet</h3>
-            <p>Our intervention programs will be displayed here once they are added. Check back soon to learn about our health initiatives.</p>
-          </div>
-        )}
+          ))}
+        </div>
       </section>
 
       {/* Featured Donor Section */}

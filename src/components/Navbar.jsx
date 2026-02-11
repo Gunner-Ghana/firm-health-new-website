@@ -1,6 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { usePublishedInterventions } from '../hooks/useInterventionDB';
 import logo from '../assets/logo.png';
 import './Navbar.css';
 
@@ -8,7 +7,6 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
-  const publishedInterventions = usePublishedInterventions();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -36,16 +34,14 @@ function Navbar() {
     }
   };
 
-  // Build interventions menu items dynamically from database
-  const interventionItems = useMemo(() => {
-    if (!publishedInterventions || publishedInterventions.length === 0) {
-      return [];
-    }
-    return publishedInterventions.map(intervention => ({
-      path: `/interventions/${intervention.slug}`,
-      label: intervention.title
-    }));
-  }, [publishedInterventions]);
+  // Interventions menu: 5 static items only
+  const interventionItems = [
+    { path: '/interventions/ica-programmes', label: 'ICA Programme' },
+    { path: '/interventions/community-interventions', label: 'Community Interventions' },
+    { path: '/interventions/blood-donation', label: 'Blood Donation' },
+    { path: '/interventions/medical-screening', label: 'Medical Screening' },
+    { path: '/interventions/feed-the-aged', label: 'Feed the Aged' },
+  ];
 
   const dropdownMenus = {
     management: {
@@ -65,6 +61,7 @@ function Navbar() {
       label: 'Events',
       items: [
         { path: '/events', label: 'Event List' },
+        { path: '/reports', label: 'Download Reports' },
       ]
     }
   };
@@ -227,6 +224,15 @@ function Navbar() {
             onClick={closeMenu}
           >
             Blogs
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/contact"
+            className={location.pathname === '/contact' ? 'active' : ''}
+            onClick={closeMenu}
+          >
+            Contact
           </Link>
         </li>
       </ul>

@@ -25,6 +25,8 @@ function Footer() {
             <li><Link to="/gallery">Gallery</Link></li>
             <li><Link to="/volunteer">Volunteer</Link></li>
             <li><Link to="/blogs">Blogs</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/reports">Reports</Link></li>
           </ul>
         </div>
 

@@ -50,10 +50,12 @@ function FeedTheAged() {
       <section
         className={`page-hero ${heroVisible ? 'animate-fade-in' : 'animate-hidden'}`}
         ref={heroRef}
-        style={{ background: 'linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #fbbf24 100%)' }}
+        style={{
+          background: 'linear-gradient(135deg, rgba(217, 119, 6, 0.85) 0%, rgba(245, 158, 11, 0.8) 50%, rgba(251, 191, 36, 0.85) 100%), url("/images/interventions/feedtheaged.png") center/cover no-repeat'
+        }}
       >
-        <h1>Feed the Aged</h1>
-        <p>Honoring our elders through nutrition, care, and companionship.</p>
+        <h1>Feed the Aged and Medical Outreach</h1>
+        <p>Honoring our elders through nutrition, care, and comprehensive medical support.</p>
       </section>
 
       <section className="page-content">

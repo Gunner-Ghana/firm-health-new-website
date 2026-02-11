@@ -5,80 +5,68 @@ function RadioProgramme() {
   const [heroRef, heroVisible] = useScrollAnimation({ threshold: 0.2 });
   const [introRef, introVisible] = useScrollAnimation();
   const [statsRef, statsVisible] = useScrollAnimation();
-  const [setInterventionRef, visibleInterventions] = useMultipleScrollAnimation(6);
+  const [setInterventionRef, visibleInterventions] = useMultipleScrollAnimation(5);
 
   const interventions = [
     {
       id: 1,
       title: 'Weekly Public Health Radio Program',
       year: '2025',
-      description: 'The Weekly Public Health Radio Program is an initiative by the Firm Health Ghana Foundation to educate the public on essential health topics, promote wellness, and encourage healthy lifestyles. The program features experienced healthcare professionals and nutrition experts who provide insights into various health-related issues.',
-      objective: 'Raise awareness on public health issues and provide reliable health information to the public through interactive discussions and expert insights.',
-      implementation: 'The program airs weekly on Dynamite (88.9) FM every Tuesday from 8:30 AM – 9:15 AM, featuring resource persons such as doctors, nutritionists, and health professionals to discuss various health topics. Listeners engage through Q&A sessions, where experts provide professional advice and recommendations.',
-      impact: 'The program provides credible and practical health education, encourages healthy living through discussions on nutrition, wellness, and preventive healthcare, and strengthens community health awareness.',
+      description: 'An initiative by the Firm Health Ghana Foundation to educate the public on essential health topics through radio broadcasting. The program features experienced healthcare professionals and nutrition experts who provide insights into various health-related issues.',
+      objective: 'Raise awareness on public health issues via interactive discussions with healthcare experts.',
+      implementation: 'Airs weekly on Dynamite (88.9) FM, Tuesdays 8:30-9:15 AM with doctors and nutritionists; includes Q&A sessions with listeners.',
+      impact: 'Provides credible health education and strengthens community health awareness across the Western Region.',
       icon: '📻',
       color: '#10b981',
-      image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80'
+      image: '/images/interventions/cause11.png'
     },
     {
       id: 2,
       title: 'Quarterly Blood Donation Drive',
       year: '2023',
-      description: 'The primary aim of organizing the quarterly blood donation drives is to facilitate the collection of donated blood from voluntary individuals to supply safe and sufficient blood and blood products to healthcare facilities in the Tarkwa and Bogoso Municipalities.',
-      objective: 'Contribute to the local healthcare system by ensuring a stable blood supply for medical emergencies and treatments.',
-      implementation: 'Organize quarterly blood donation events, collaborating with local hospitals, medical professionals, and volunteers. Conduct awareness campaigns before each drive. Target: 1,000 pints of blood annually (250 pints per quarter).',
-      impact: 'Saving lives by providing a sustainable and accessible blood source, while raising awareness about the importance of blood donation.',
+      description: 'Collects voluntary blood donations for healthcare facilities in Tarkwa and Bogoso Municipalities to ensure stable blood supply for medical emergencies and treatments.',
+      objective: 'Ensure stable blood supply for medical emergencies and treatments in local hospitals.',
+      implementation: 'Quarterly events collaborating with hospitals, medical professionals, and volunteers with awareness campaigns. Target: 1,000 pints of blood annually.',
+      impact: 'Saves lives by providing sustainable blood sources and raises donation awareness in the community.',
       icon: '🩸',
       color: '#ef4444',
-      image: 'https://images.unsplash.com/photo-1615461066841-6116e61058f4?w=800&q=80'
+      image: '/images/interventions/cause-5.jpg'
     },
     {
       id: 3,
-      title: 'Weekly Radio Program - Apɔwmudzen Mmr3 Nie',
-      year: '2013',
-      description: 'Dubbed "Apɔwmudzen Mmr3 Nie" (Firm Health Hour), this flagship program is aired every Wednesday morning on Dynamite FM (88.9) between 8:30 am – 9:30 am. The program is anchored by Dr Joseph Darko (Medical Superintendent, New Government Hospital, Bogoso).',
-      objective: 'Raise awareness, disseminate information, and educate the community on health, education, social issues, and community development.',
-      implementation: 'Host weekly radio programs featuring expert guests, community leaders, and informative content. Encourage audience participation through call-ins, surveys, or social media interaction.',
-      impact: 'Increased knowledge and awareness among community members, fostering a sense of unity and empowerment.',
-      icon: '🎙️',
-      color: '#8b5cf6',
-      image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&q=80'
+      title: 'Community Medical Screening Program',
+      year: '2016',
+      description: 'Free medical screenings across 20+ communities, having screened over 13,000 individuals since 2016. The program provides accessible and preventive healthcare services to underserved communities.',
+      objective: 'Improve community health through early disease detection and prevention.',
+      implementation: 'Regular screening camps with healthcare professionals covering BP, blood sugar, urinalysis, BMI, and eye tests.',
+      impact: 'Early disease detection, increased health awareness, and promotion of healthier lifestyles.',
+      icon: '🏥',
+      color: '#3b82f6',
+      image: '/images/interventions/event-1.jpg'
     },
     {
       id: 4,
-      title: 'Community Medical Screening Program',
-      year: '2016',
-      description: 'The primary goal is to enhance community health and well-being by providing accessible and preventive healthcare services. Over the years, the foundation has visited over 20 communities across the country and screened over 13,000 individuals.',
-      objective: 'Improve community health by early detection and prevention of diseases through regular medical screenings.',
-      implementation: 'Conduct regular medical screening camps in collaboration with healthcare professionals. Tests include: BP tests, blood sugar level tests, urinalysis tests, eye tests, and more.',
-      impact: 'Early detection of health issues, increased health awareness, and promotion of a healthier lifestyle within the community.',
-      icon: '🏥',
-      color: '#3b82f6',
-      image: 'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=800&q=80'
+      title: '5KM Health Walk and Aerobics Session',
+      year: '2018',
+      description: 'Monthly fitness initiative held on the last Saturday of each month to promote physical activity and community engagement. The event encourages participation from all age groups.',
+      objective: 'Promote physical activity, healthy living, and community engagement through accessible fitness programs.',
+      implementation: 'Organized 5KM walks with designated routes followed by qualified aerobics instruction.',
+      impact: 'Contributes to improved health, social cohesion, and overall community well-being.',
+      icon: '🏃',
+      color: '#f59e0b',
+      image: '/images/interventions/healthwalk.png'
     },
     {
       id: 5,
-      title: '5KM Health Walk and Aerobics Session',
-      year: '2018',
-      description: 'The 5KM Health Walk and Aerobics Session is a fantastic initiative to promote physical activity, fitness, and community well-being. This event is observed on the last Saturday of every month.',
-      objective: 'Promote physical activity, community engagement, and overall well-being.',
-      implementation: 'Organize 5KM health walks with a designated route. Follow up with an aerobics session led by qualified instructors. Encourage participation from all age groups.',
-      impact: 'Contributes to the overall health, social cohesion, and well-being of the community.',
-      icon: '🏃',
-      color: '#f59e0b',
-      image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80'
-    },
-    {
-      id: 6,
       title: 'Feed the Aged and Medical Outreach',
-      year: 'Ongoing',
-      description: 'A community initiative combining nutritional support for elderly individuals with medical screenings to assess and address their health needs. This project addresses the holistic well-being of elderly individuals within the Beyin community.',
-      objective: 'Address the needs of the elderly population by providing nutritional support and medical check-ups.',
-      implementation: 'Organize regular feeding programs for the elderly, along with comprehensive medical screenings. Collaborate with healthcare providers and nutritionists to tailor support to individual needs.',
-      impact: 'Improved well-being for the elderly population, early detection of health issues, and social engagement for this demographic.',
+      year: '2020',
+      description: 'Combines nutritional support for the elderly with comprehensive medical screenings in rural communities. This project addresses the holistic well-being of elderly individuals within communities like Beyin.',
+      objective: 'Address elderly population needs through nutrition support and medical check-ups.',
+      implementation: 'Regular feeding programs with comprehensive medical screenings via healthcare providers in communities.',
+      impact: 'Improved elderly well-being, early health issue detection, and increased social engagement for seniors.',
       icon: '👴',
       color: '#ec4899',
-      image: 'https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?w=800&q=80'
+      image: '/images/interventions/feedtheaged.png'
     }
   ];
 
@@ -116,7 +104,7 @@ function RadioProgramme() {
           className={`ci-stats-grid ${statsVisible ? 'animate-fade-up' : 'animate-hidden'}`}
         >
           <div className="ci-stat-card">
-            <span className="ci-stat-number">6</span>
+            <span className="ci-stat-number">5</span>
             <span className="ci-stat-label">Active Programs</span>
           </div>
           <div className="ci-stat-card">

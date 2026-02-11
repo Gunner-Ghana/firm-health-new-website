@@ -35,7 +35,7 @@ function Organogram() {
             <div className="org-level">
               <div className="org-node primary">
                 <h4>Executive Director</h4>
-                <p>Dr. Amelia Johnson</p>
+                <p>Dr. Sylvester Akpah</p>
               </div>
             </div>
 
@@ -45,16 +45,16 @@ function Organogram() {
             <div className="org-connector-horizontal"></div>
             <div className="org-level">
               <div className="org-node">
-                <h4>Medical Director</h4>
-                <p>Healthcare Programs</p>
+                <h4>Director-Health Services</h4>
+                <p>Dr. Joseph Darko</p>
               </div>
               <div className="org-node">
-                <h4>Operations Director</h4>
-                <p>Logistics & Admin</p>
+                <h4>Head-Logistics</h4>
+                <p>Michael Fynn Hammond</p>
               </div>
               <div className="org-node">
-                <h4>Programs Director</h4>
-                <p>Community Initiatives</p>
+                <h4>Director-Audit</h4>
+                <p>Emmanuel Smith Yeboah</p>
               </div>
             </div>
 
@@ -65,19 +65,19 @@ function Organogram() {
             <div className="org-level">
               <div className="org-node">
                 <h4>Medical Team</h4>
-                <p>Clinical Staff</p>
+                <p>Gladys Mawusi Fummey (Head Nurse)</p>
               </div>
               <div className="org-node">
-                <h4>Outreach Team</h4>
-                <p>Community Workers</p>
+                <h4>Lab & Diagnostics</h4>
+                <p>Samuel Kumah, Ernest Armoo</p>
               </div>
               <div className="org-node">
-                <h4>Education Team</h4>
-                <p>Trainers</p>
+                <h4>Community Health</h4>
+                <p>Karen Donkor, Kornyo Bertha Esinam</p>
               </div>
               <div className="org-node">
-                <h4>Support Team</h4>
-                <p>Admin & Logistics</p>
+                <h4>Admin & Communications</h4>
+                <p>Padmore Fosu Amankwah, Thomas Tetteh</p>
               </div>
             </div>
 

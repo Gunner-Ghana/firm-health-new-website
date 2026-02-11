@@ -69,9 +69,12 @@ function MedicalScreening() {
       <section
         className={`page-hero ${heroVisible ? 'animate-fade-in' : 'animate-hidden'}`}
         ref={heroRef}
+        style={{
+          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.85) 0%, rgba(37, 99, 235, 0.8) 50%, rgba(29, 78, 216, 0.85) 100%), url("/images/interventions/event-1.jpg") center/cover no-repeat'
+        }}
       >
-        <h1>Community Medical Screening</h1>
-        <p>Free health screenings bringing preventive healthcare directly to your community.</p>
+        <h1>Community Medical Screening Program</h1>
+        <p>Free health screenings bringing preventive healthcare directly to your community. Over 13,000 individuals screened across 20+ communities.</p>
       </section>
 
       <section className="page-content">

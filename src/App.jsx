@@ -20,6 +20,9 @@ import MedicalScreening from './pages/interventions/MedicalScreening';
 import FeedTheAged from './pages/interventions/FeedTheAged';
 // Events Pages
 import EventList from './pages/events/EventList';
+// Other Pages
+import Contact from './pages/Contact';
+import ReportDownload from './pages/ReportDownload';
 // Admin Pages
 import AdminLogin from './pages/AdminLogin';
 import AdminOverview from './pages/admin/AdminOverview';
@@ -70,6 +73,10 @@ function AppContent() {
 
           {/* Gallery Route */}
           <Route path="/gallery" element={<Gallery />} />
+
+          {/* Contact & Reports */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/reports" element={<ReportDownload />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLogin />} />

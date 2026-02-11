@@ -34,9 +34,11 @@ function BloodDonation() {
       <section
         className={`page-hero ${heroVisible ? 'animate-fade-in' : 'animate-hidden'}`}
         ref={heroRef}
-        style={{ background: 'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)' }}
+        style={{
+          background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.85) 0%, rgba(239, 68, 68, 0.8) 50%, rgba(248, 113, 113, 0.85) 100%), url("/images/interventions/cause-5.jpg") center/cover no-repeat'
+        }}
       >
-        <h1>Quarterly Blood Donation</h1>
+        <h1>Quarterly Blood Donation Drive</h1>
         <p>Saving lives one donation at a time through our regular blood donation drives.</p>
       </section>
 
