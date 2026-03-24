@@ -18,6 +18,10 @@ function Navbar() {
     setActiveDropdown(null);
   };
 
+  const handleMenuKeyDown = (e) => {
+    if (e.key === 'Escape') closeMenu();
+  };
+
   const toggleDropdown = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
@@ -72,6 +76,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <div className="navbar-brand">
         <Link to="/" onClick={closeMenu} className="brand-link">
           <img src={logo} alt="Firm Health Ghana Foundation" className="navbar-logo" />
@@ -82,14 +87,17 @@ function Navbar() {
       <button
         className={`hamburger ${isMenuOpen ? 'active' : ''}`}
         onClick={toggleMenu}
+        onKeyDown={handleMenuKeyDown}
         aria-label="Toggle menu"
+        aria-expanded={isMenuOpen}
+        aria-controls="navbar-links"
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <ul className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+      <ul id="navbar-links" className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
         <li>
           <Link
             to="/"
@@ -118,9 +126,11 @@ function Navbar() {
           <button
             className={`dropdown-trigger ${isDropdownActive('management') ? 'active' : ''}`}
             onClick={() => toggleDropdown('management')}
+            aria-haspopup="true"
+            aria-expanded={activeDropdown === 'management'}
           >
             Management
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={activeDropdown === 'management' ? 'rotate' : ''}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={activeDropdown === 'management' ? 'rotate' : ''} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           </button>
@@ -148,9 +158,11 @@ function Navbar() {
           <button
             className={`dropdown-trigger ${isDropdownActive('interventions') ? 'active' : ''}`}
             onClick={() => toggleDropdown('interventions')}
+            aria-haspopup="true"
+            aria-expanded={activeDropdown === 'interventions'}
           >
             Interventions
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={activeDropdown === 'interventions' ? 'rotate' : ''}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={activeDropdown === 'interventions' ? 'rotate' : ''} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           </button>
@@ -178,9 +190,11 @@ function Navbar() {
           <button
             className={`dropdown-trigger ${isDropdownActive('events') ? 'active' : ''}`}
             onClick={() => toggleDropdown('events')}
+            aria-haspopup="true"
+            aria-expanded={activeDropdown === 'events'}
           >
             Events
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={activeDropdown === 'events' ? 'rotate' : ''}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={activeDropdown === 'events' ? 'rotate' : ''} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           </button>

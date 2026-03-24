@@ -1,9 +1,7 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useScrollAnimation, useMultipleScrollAnimation } from '../hooks/useScrollAnimation';
-import { usePublishedInterventions } from '../hooks/useInterventionDB';
 import { useUpcomingEvents } from '../hooks/useEventDB';
-import { usePublishedPhotos } from '../hooks/usePhotoDB';
 import { usePublishedSponsors } from '../hooks/useSponsorDB';
 import sponsor2 from '../assets/sponsors/2.png';
 import sponsor5 from '../assets/sponsors/5.png';
@@ -14,136 +12,56 @@ import sponsor8 from '../assets/sponsors/8.png';
 import sponsor9 from '../assets/sponsors/9.png';
 import './HomePage.css';
 
+// Static data defined outside component — no recreation on every render
+const GALLERY_PHOTOS = [
+  { id: 'g1', src: '/images/gallery/thumbs/p1.jpg', alt: 'Community Health Outreach' },
+  { id: 'g2', src: '/images/gallery/thumbs/p2.jpg', alt: 'Medical Screening' },
+  { id: 'g3', src: '/images/gallery/thumbs/g3.jpg', alt: 'Blood Donation Drive' },
+  { id: 'g4', src: '/images/gallery/thumbs/p3.jpg', alt: 'Feed the Aged' },
+];
+
+const DONOR = {
+  name: 'Intertek Ghana Limited',
+  description: 'Intertek Ghana Limited has been our primary supporter, helping us reach more communities and transform lives through their generous contributions to our health initiatives.',
+  logo: sponsor8,
+};
+
+const STATIC_SPONSORS = [
+  { id: 's1', image: sponsor6 },
+  { id: 's2', image: sponsor5 },
+  { id: 's3', image: sponsor2 },
+  { id: 's4', image: sponsorGhanaGas },
+  { id: 's5', image: sponsor7 },
+  { id: 's6', image: sponsor8 },
+  { id: 's7', image: sponsor9 },
+];
+
+const EVENT_COLORS = { screening: '#10b981', donation: '#ef4444', fair: '#8b5cf6' };
+const getEventColor = (type) => EVENT_COLORS[type] || '#10b981';
+
 function HomePage() {
-  const [heroRef, heroVisible] = useScrollAnimation({ threshold: 0.2 });
   const [impactTitleRef, impactTitleVisible] = useScrollAnimation();
   const [setImpactCardRef, visibleImpactCards] = useMultipleScrollAnimation(3);
   const [donateRef, donateVisible] = useScrollAnimation();
-  const [interventionsTitleRef, interventionsTitleVisible] = useScrollAnimation();
   const [donorRef, donorVisible] = useScrollAnimation();
   const [galleryTitleRef, galleryTitleVisible] = useScrollAnimation();
+  const [setGalleryRef, visibleGalleryItems] = useMultipleScrollAnimation(4);
   const [eventsTitleRef, eventsTitleVisible] = useScrollAnimation();
   const [sponsorsTitleRef, sponsorsTitleVisible] = useScrollAnimation();
-
-  // Lightbox state
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
-
-  const dbInterventions = usePublishedInterventions();
-
-  const staticInterventions = [
-    {
-      id: 'static-1',
-      title: 'ICA Programmes',
-      slug: 'ica-programmes',
-      description: 'A 9-day integrated volunteer programme combining health screening, maternal & child health, medical outreach, and community health worker training in underserved communities.',
-      color: '#10b981',
-    },
-    {
-      id: 'static-2',
-      title: 'Community Medical Screening',
-      slug: 'medical-screening',
-      description: 'Free health screenings bringing preventive healthcare directly to communities, with over 13,000 individuals screened across 20+ communities for blood pressure, blood sugar, vision, and more.',
-      color: '#3b82f6',
-    },
-    {
-      id: 'static-3',
-      title: 'Quarterly Blood Donation Drive',
-      slug: 'blood-donation',
-      description: 'Saving lives one donation at a time through regular community blood donation drives, addressing the critical shortage of blood supplies in local healthcare facilities.',
-      color: '#ef4444',
-    },
-    {
-      id: 'static-4',
-      title: 'Feed the Aged & Medical Outreach',
-      slug: 'feed-the-aged',
-      description: 'Honoring our elders through nutrition, care, and comprehensive medical support — ensuring elderly community members receive nutritious meals and health monitoring.',
-      color: '#f59e0b',
-    },
-    {
-      id: 'static-5',
-      title: 'Community Interventions',
-      slug: 'community-interventions',
-      description: 'Transforming lives through diverse health and wellness initiatives including weekly public health radio programmes, health walks, and community awareness campaigns across Ghana.',
-      color: '#8b5cf6',
-    }
-  ];
-
-  const interventions = dbInterventions && dbInterventions.length > 0 ? dbInterventions : staticInterventions;
-  const [setInterventionRef, visibleInterventions] = useMultipleScrollAnimation(interventions.length);
-
 
   const dbEvents = useUpcomingEvents();
   const [setEventRef, visibleEvents] = useMultipleScrollAnimation(dbEvents?.length || 3);
 
-  const dbPhotos = usePublishedPhotos();
-  const [setGalleryRef, visibleGalleryItems] = useMultipleScrollAnimation(dbPhotos?.length || 8);
-
-  const donor = {
-    name: 'Intertek Ghana Limited',
-    description: 'Intertek Ghana Limited has been our primary supporter, helping us reach more communities and transform lives through their generous contributions to our health initiatives.',
-    logo: '/intertek-logo.png'
-  };
-
   const dbSponsors = usePublishedSponsors();
-
-  const staticSponsors = [
-    { name: 'Sponsor', image: sponsor6 },
-    { name: 'Sponsor', image: sponsor5 },
-    { name: 'Sponsor', image: sponsor2 },
-    { name: 'Ghana Gas', image: sponsorGhanaGas },
-    { name: 'Sponsor', image: sponsor7 },
-    { name: 'Sponsor', image: sponsor8 },
-    { name: 'Sponsor', image: sponsor9 },
-  ];
-
   const allSponsors = useMemo(() => {
-    const dynamic = (dbSponsors || []).map(s => ({ name: s.name, image: s.image, website: s.website }));
-    return [...staticSponsors, ...dynamic];
+    const dynamic = (dbSponsors || []).map((s, i) => ({ id: `db-${s.id || i}`, name: s.name, image: s.image }));
+    return [...STATIC_SPONSORS, ...dynamic];
   }, [dbSponsors]);
-
-  // Handle body overflow when lightbox opens/closes
-  useEffect(() => {
-    if (lightboxOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [lightboxOpen]);
-
-  const openLightbox = (index) => {
-    setCurrentImage(index);
-    setLightboxOpen(true);
-  };
-
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-  };
-
-  const nextImage = () => {
-    if (dbPhotos && dbPhotos.length > 0) {
-      setCurrentImage((prev) => (prev + 1) % dbPhotos.length);
-    }
-  };
-
-  const prevImage = () => {
-    if (dbPhotos && dbPhotos.length > 0) {
-      setCurrentImage((prev) => (prev - 1 + dbPhotos.length) % dbPhotos.length);
-    }
-  };
-
-  const getEventColor = (type) => {
-    const colors = { screening: '#10b981', donation: '#ef4444', fair: '#8b5cf6' };
-    return colors[type] || '#10b981';
-  };
 
   return (
     <div className="home">
-      {/* Hero Section */}
-      <section className={`hero ${heroVisible ? 'animate-fade-in' : 'animate-hidden'}`} ref={heroRef}>
+      {/* Hero Section — always visible, animates in via CSS */}
+      <section className="hero">
         <div className="hero-background">
           <div className="hero-image-overlay"></div>
         </div>
@@ -157,8 +75,9 @@ function HomePage() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-video"
+              aria-label="Watch Video (opens in new tab)"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
               </svg>
               Watch Video
@@ -182,7 +101,7 @@ function HomePage() {
             { number: '500+', label: 'Volunteers' },
           ].map((item, index) => (
             <div
-              key={index}
+              key={item.label}
               ref={setImpactCardRef(index)}
               className={`impact-card ${visibleImpactCards.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
               style={{ transitionDelay: `${index * 100}ms` }}
@@ -200,8 +119,8 @@ function HomePage() {
         ref={donateRef}
       >
         <div className="donate-content">
-          <div className="donate-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+          <div className="donate-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
           </div>
@@ -212,53 +131,13 @@ function HomePage() {
             target="_blank"
             rel="noopener noreferrer"
             className="donate-btn"
+            aria-label="Donate money (opens in new tab)"
           >
             Donate Money
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </a>
-        </div>
-      </section>
-
-
-      {/* Interventions Section */}
-      <section className="interventions-section">
-        <h2
-          ref={interventionsTitleRef}
-          className={interventionsTitleVisible ? 'animate-fade-up' : 'animate-hidden'}
-        >
-          Our Interventions
-        </h2>
-        <p className="section-subtitle">Transforming lives through comprehensive health and wellness initiatives across Ghana.</p>
-        <div className="interventions-grid">
-          {interventions.map((intervention, index) => (
-            <div
-              key={intervention.id}
-              ref={setInterventionRef(index)}
-              className={`intervention-card ${visibleInterventions.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <div className="intervention-image">
-                {intervention.image ? (
-                  <img src={intervention.image} alt={intervention.title} />
-                ) : (
-                  <div className="intervention-placeholder" style={{ backgroundColor: intervention.color || '#10b981' }}></div>
-                )}
-                <div className="intervention-overlay" style={{ background: `linear-gradient(135deg, ${intervention.color || '#10b981'}dd 0%, ${intervention.color || '#10b981'}99 100%)` }}></div>
-              </div>
-              <div className="intervention-content">
-                <h3>{intervention.title}</h3>
-                <p>{intervention.description}</p>
-                <Link to={`/interventions/${intervention.slug}`} className="intervention-btn" style={{ backgroundColor: intervention.color || '#10b981' }}>
-                  Learn More
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -270,12 +149,12 @@ function HomePage() {
         <div className="featured-donor-content">
           <div className="featured-donor-badge">Our Valued Partner</div>
           <div className="featured-donor-logo">
-            <img src={donor.logo} alt={donor.name} />
+            <img src={DONOR.logo} alt={DONOR.name} />
           </div>
-          <h2>{donor.name}</h2>
-          <p>{donor.description}</p>
+          <h2>{DONOR.name}</h2>
+          <p>{DONOR.description}</p>
           <div className="donor-gratitude">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
             <span>Thank you for your continued support</span>
@@ -284,7 +163,7 @@ function HomePage() {
       </section>
 
       {/* Photo Gallery Section */}
-      <section className="gallery-section">
+      <section className="hp-gallery-section">
         <h2
           ref={galleryTitleRef}
           className={galleryTitleVisible ? 'animate-fade-up' : 'animate-hidden'}
@@ -292,121 +171,91 @@ function HomePage() {
           Photo Gallery
         </h2>
         <p className="section-subtitle">Moments captured from our health initiatives and community programs.</p>
-        {dbPhotos && dbPhotos.length > 0 ? (
-          <div className="gallery-grid">
-            {dbPhotos.map((photo, index) => (
+        <div className="hp-gallery-grid">
+          {GALLERY_PHOTOS.map((photo, index) => (
+            <Link
+              key={photo.id}
+              to="/gallery"
+              ref={setGalleryRef(index)}
+              className={`hp-gallery-item ${visibleGalleryItems.has(index) ? 'animate-scale-up' : 'animate-hidden'}`}
+              style={{ transitionDelay: `${index * 80}ms` }}
+              aria-label={`${photo.alt} — view gallery`}
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+                className="hp-gallery-img"
+              />
+              <div className="hp-gallery-overlay" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="hp-gallery-cta">
+          <Link to="/gallery" className="view-gallery-btn">
+            View All Photos
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      {/* Events Section — only shown when there are upcoming events */}
+      {dbEvents && dbEvents.length > 0 && (
+        <section className="events-section">
+          <h2
+            ref={eventsTitleRef}
+            className={eventsTitleVisible ? 'animate-fade-up' : 'animate-hidden'}
+          >
+            Our Events
+          </h2>
+          <p className="section-subtitle">Join us at our upcoming health initiatives and community programs.</p>
+          <div className="events-grid">
+            {dbEvents.slice(0, 3).map((event, index) => (
               <div
-                key={photo.id}
-                ref={setGalleryRef(index)}
-                className={`gallery-item ${visibleGalleryItems.has(index) ? 'animate-scale-up' : 'animate-hidden'}`}
-                style={{ transitionDelay: `${index * 75}ms` }}
-                onClick={() => openLightbox(index)}
+                key={event.id}
+                ref={setEventRef(index)}
+                className={`event-card ${visibleEvents.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <img src={photo.image} alt={photo.title} className="gallery-image" />
-                <div className="gallery-overlay">
-                  <span className="gallery-category">{photo.category}</span>
-                  <h4>{photo.title}</h4>
-                  <span className="gallery-zoom">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                <div className="event-badge" style={{ backgroundColor: `${getEventColor(event.type)}20`, color: getEventColor(event.type) }}>
+                  {event.type ? event.type.charAt(0).toUpperCase() + event.type.slice(1) : 'Event'}
+                </div>
+                <h3>{event.title}</h3>
+                <div className="event-details">
+                  <div className="event-detail">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                     </svg>
-                  </span>
+                    <span>{new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                  </div>
+                  <div className="event-detail">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    <span>{event.location}</span>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-        ) : (
-          <div className="empty-state-card">
-            <div className="empty-state-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+          <div className="events-cta">
+            <Link to="/events" className="view-events-btn">
+              View All Events
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
-            </div>
-            <h3>No Photos Added Yet</h3>
-            <p>Our photo gallery will be displayed here once photos are added. Check back soon to see moments from our health initiatives.</p>
+            </Link>
           </div>
-        )}
-      </section>
-
-      {/* Lightbox */}
-      {lightboxOpen && dbPhotos && dbPhotos.length > 0 && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <button className="lightbox-close" onClick={closeLightbox}>×</button>
-          <button className="lightbox-prev" onClick={(e) => { e.stopPropagation(); prevImage(); }}>‹</button>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <img src={dbPhotos[currentImage].image} alt={dbPhotos[currentImage].title} className="lightbox-image" />
-            <div className="lightbox-info">
-              <span className="lightbox-category">{dbPhotos[currentImage].category}</span>
-              <h3>{dbPhotos[currentImage].title}</h3>
-              <p>{currentImage + 1} / {dbPhotos.length}</p>
-            </div>
-          </div>
-          <button className="lightbox-next" onClick={(e) => { e.stopPropagation(); nextImage(); }}>›</button>
-        </div>
+        </section>
       )}
-
-      {/* Events Section */}
-      <section className="events-section">
-        <h2
-          ref={eventsTitleRef}
-          className={eventsTitleVisible ? 'animate-fade-up' : 'animate-hidden'}
-        >
-          Our Events
-        </h2>
-        <p className="section-subtitle">Join us at our upcoming health initiatives and community programs.</p>
-        {dbEvents && dbEvents.length > 0 ? (
-          <>
-            <div className="events-grid">
-              {dbEvents.slice(0, 3).map((event, index) => (
-                <div
-                  key={event.id}
-                  ref={setEventRef(index)}
-                  className={`event-card ${visibleEvents.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <div className="event-badge" style={{ backgroundColor: `${getEventColor(event.type)}20`, color: getEventColor(event.type) }}>
-                    {event.type ? event.type.charAt(0).toUpperCase() + event.type.slice(1) : 'Event'}
-                  </div>
-                  <h3>{event.title}</h3>
-                  <div className="event-details">
-                    <div className="event-detail">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                      </svg>
-                      <span>{new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                    </div>
-                    <div className="event-detail">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                      </svg>
-                      <span>{event.location}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="events-cta">
-              <Link to="/events" className="view-events-btn">
-                View All Events
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </Link>
-            </div>
-          </>
-        ) : (
-          <div className="empty-state-card">
-            <div className="empty-state-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-              </svg>
-            </div>
-            <h3>No Upcoming Events</h3>
-            <p>There are no upcoming events scheduled at the moment. Check back soon for our health initiatives and community programs.</p>
-          </div>
-        )}
-      </section>
 
       {/* Sponsors Section */}
       <section className="sponsors-section">
@@ -417,15 +266,14 @@ function HomePage() {
           Our Partners & Sponsors
         </h2>
         <div className="sponsors-slider">
-          <div className="sponsors-track">
+          <div className="sponsors-track" aria-hidden="true">
             {[...allSponsors, ...allSponsors].map((sponsor, index) => (
-              <div key={index} className="sponsor-item">
+              <div key={`${sponsor.id}-${index}`} className="sponsor-item">
                 {sponsor.image ? (
-                  <img src={sponsor.image} alt={sponsor.name} className="sponsor-logo-img" />
+                  <img src={sponsor.image} alt={sponsor.name || 'Sponsor'} className="sponsor-logo-img" />
                 ) : (
-                  <div className="sponsor-logo">{sponsor.name.substring(0, 3).toUpperCase()}</div>
+                  <div className="sponsor-logo">{(sponsor.name || '').substring(0, 3).toUpperCase()}</div>
                 )}
-                <span className="sponsor-name">{sponsor.name}</span>
               </div>
             ))}
           </div>

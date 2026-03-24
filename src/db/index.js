@@ -275,4 +275,26 @@ db.version(13).stores({
   }
 })
 
+// Version 14: Add cover images to seeded blog posts
+db.version(14).stores({
+  volunteers: '++id, email, firstName, lastName, createdAt, status, profileImage, showOnWebsite, biography',
+  blogs: '++id, title, slug, createdAt, updatedAt, published',
+  events: '++id, title, date, createdAt, updatedAt, published, type',
+  interventions: '++id, title, slug, createdAt, updatedAt, published, order',
+  photos: '++id, title, category, createdAt, published, order',
+  members: '++id, name, type, createdAt, updatedAt, published, order',
+  sponsors: '++id, name, createdAt, updatedAt, published, order'
+}).upgrade(async tx => {
+  const blogImages = {
+    'support-intertek-ghana-limited': '/images/gallery/cause-4.jpg',
+    'mental-health-across-the-world':  '/images/gallery/g13.jpg',
+    'drexel-and-ghana-mental-health':  '/images/gallery/p1.jpg',
+  }
+  await tx.table('blogs').toCollection().modify(blog => {
+    if (!blog.image && blogImages[blog.slug]) {
+      blog.image = blogImages[blog.slug]
+    }
+  })
+})
+
 export default db

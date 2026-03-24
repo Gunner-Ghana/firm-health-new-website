@@ -45,7 +45,7 @@ function AppContent() {
   return (
     <div className="app">
       {!isAdminDashboard && <Navbar />}
-      <main className={isAdminDashboard ? 'admin-page' : ''}>
+      <main id="main-content" className={isAdminDashboard ? 'admin-page' : ''}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutUs />} />

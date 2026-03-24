@@ -89,7 +89,7 @@ function Contact() {
               className={`contact-info-card glass-card ${visibleCards.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="contact-info-icon">
+              <div className="contact-info-icon" aria-hidden="true">
                 {info.icon}
               </div>
               <h3>{info.label}</h3>
@@ -130,7 +130,7 @@ function Contact() {
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="name">Full Name</label>
+                    <label htmlFor="name">Full Name <span aria-hidden="true">*</span></label>
                     <input
                       type="text"
                       id="name"
@@ -142,7 +142,7 @@ function Contact() {
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="email">Email Address</label>
+                    <label htmlFor="email">Email Address <span aria-hidden="true">*</span></label>
                     <input
                       type="email"
                       id="email"
@@ -155,7 +155,7 @@ function Contact() {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="subject">Subject</label>
+                  <label htmlFor="subject">Subject <span aria-hidden="true">*</span></label>
                   <input
                     type="text"
                     id="subject"
@@ -167,7 +167,7 @@ function Contact() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="message">Message</label>
+                  <label htmlFor="message">Message <span aria-hidden="true">*</span></label>
                   <textarea
                     id="message"
                     name="message"
@@ -180,7 +180,7 @@ function Contact() {
                 </div>
                 <button type="submit" className="contact-btn">
                   Send Message
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                   </svg>
                 </button>

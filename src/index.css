@@ -82,6 +82,17 @@ img {
   box-shadow: var(--glass-shadow);
 }
 
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
@@ -89,6 +100,13 @@ img {
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: cardEnter 0.45s ease both;
+}
+
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
 }
 
 /* Scroll Animation Classes */
@@ -187,3 +205,28 @@ img {
     visibility: visible;
   }
 }
+
+/* Staggered card entrance delays */
+.board-grid .board-card:nth-child(1),
+.people-grid .person-card:nth-child(1),
+.reports-grid .report-card:nth-child(1),
+.contact-grid .contact-info-card:nth-child(1) { animation-delay: 0ms; }
+
+.board-grid .board-card:nth-child(2),
+.people-grid .person-card:nth-child(2),
+.reports-grid .report-card:nth-child(2),
+.contact-grid .contact-info-card:nth-child(2) { animation-delay: 80ms; }
+
+.board-grid .board-card:nth-child(3),
+.people-grid .person-card:nth-child(3),
+.reports-grid .report-card:nth-child(3),
+.contact-grid .contact-info-card:nth-child(3) { animation-delay: 160ms; }
+
+.board-grid .board-card:nth-child(4),
+.people-grid .person-card:nth-child(4),
+.reports-grid .report-card:nth-child(4),
+.contact-grid .contact-info-card:nth-child(4) { animation-delay: 240ms; }
+
+.board-grid .board-card:nth-child(n+5),
+.people-grid .person-card:nth-child(n+5),
+.reports-grid .report-card:nth-child(n+5) { animation-delay: 320ms; }

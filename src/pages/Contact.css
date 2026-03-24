@@ -10,6 +10,13 @@
   padding: 2rem;
   text-align: center;
   border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: cardEnter 0.45s ease both;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
 }
 
 .contact-info-icon {
@@ -66,6 +73,8 @@ a.contact-info-value:hover {
 .contact-form-card {
   padding: 2.5rem;
   border-radius: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: cardEnter 0.45s ease both;
 }
 
 .contact-form-card h2 {

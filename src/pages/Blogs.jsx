@@ -33,9 +33,10 @@ function Blogs() {
               <Link
                 key={blog.id}
                 to={`/blog/${blog.slug}`}
-                className={`blog-card glass-card ${visibleBlogs.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
+                className={`blog-card ${visibleBlogs.has(index) ? 'animate-fade-up' : 'animate-hidden'}`}
                 ref={setBlogRef(index)}
                 style={{ transitionDelay: `${index * 100}ms` }}
+                aria-label={`Read ${blog.title}`}
               >
                 {blog.image ? (
                   <div className="blog-card-image">

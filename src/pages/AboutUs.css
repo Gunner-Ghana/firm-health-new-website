@@ -818,3 +818,22 @@
     font-size: 0.8rem;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .value-card,
+  .collaboration-card,
+  .goal-card,
+  .achievement-card,
+  .mission-vision-card {
+    transition: none;
+  }
+  .value-card:hover,
+  .collaboration-card:hover,
+  .goal-card:hover,
+  .achievement-card:hover {
+    transform: none;
+  }
+  .sponsors-track {
+    animation: none;
+  }
+}

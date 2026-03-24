@@ -386,3 +386,20 @@
     aspect-ratio: 4/3;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item,
+  .gallery-item img,
+  .gallery-item-overlay,
+  .gallery-page .lightbox-prev,
+  .gallery-page .lightbox-next,
+  .gallery-page .lightbox-close {
+    transition: none;
+  }
+  .gallery-item:hover {
+    transform: none;
+  }
+  .gallery-item:hover img {
+    transform: none;
+  }
+}

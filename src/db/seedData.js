@@ -568,6 +568,7 @@ async function seedBlogs() {
     {
       title: 'Support - Intertek Ghana Limited',
       slug: 'support-intertek-ghana-limited',
+      image: '/images/gallery/cause-4.jpg',
       content: 'We appreciate Intertek Ghana Limited for their generous support ahead of the 2nd quarter blood donation drive. Their commitment to community health and corporate social responsibility exemplifies the kind of partnership that makes our work possible. With their support, we are able to expand our blood donation outreach and save more lives in the Western Region.\n\nIntertek Ghana Limited has been a valued partner in our mission to ensure adequate blood supply for hospitals. Their contribution helps us cover logistics, medical supplies, and community mobilization efforts that are essential for successful blood donation campaigns.\n\nWe call on other corporate organizations to join us in this life-saving mission. Together, we can build a healthier community and ensure that no patient suffers due to inadequate blood supply.',
       author: 'Admin',
       published: 1,
@@ -577,6 +578,7 @@ async function seedBlogs() {
     {
       title: 'Mental Health Across the World',
       slug: 'mental-health-across-the-world',
+      image: '/images/gallery/g13.jpg',
       content: 'Behavioral health counselling student explores mental health across the world. Mental health remains one of the most pressing global health challenges, affecting millions of people regardless of age, gender, or socioeconomic status.\n\nIn Ghana, mental health awareness has been growing steadily, but significant challenges remain in terms of access to care, stigma reduction, and resource allocation. The Firm Health Ghana Foundation is committed to integrating mental health awareness into our community health programs.\n\nThrough our partnerships with international institutions like Drexel University, we are working to bridge the gap between global mental health research and local community needs. Our radio programs regularly feature mental health topics to educate and destigmatize mental health issues in our communities.',
       author: 'Rebecca Burke',
       published: 1,
@@ -586,6 +588,7 @@ async function seedBlogs() {
     {
       title: 'Drexel and Ghana Mental Health',
       slug: 'drexel-and-ghana-mental-health',
+      image: '/images/gallery/p1.jpg',
       content: 'First-of-its-kind course pairs Drexel with Ghana and mental health with community. This groundbreaking collaboration between Drexel University and Firm Health Ghana Foundation represents a new model for international health education and community engagement.\n\nThe program brings together students from diverse backgrounds to explore the intersection of mental health and community development in Ghana\'s Western Region. Participants gain firsthand experience in community health settings while contributing to local mental health awareness efforts.\n\nThis partnership has opened doors for cultural exchange, knowledge sharing, and the development of context-appropriate mental health interventions. Students work alongside local health professionals to understand the unique challenges and opportunities in Ghana\'s mental health landscape.',
       author: 'Alissa Falcone',
       published: 1,

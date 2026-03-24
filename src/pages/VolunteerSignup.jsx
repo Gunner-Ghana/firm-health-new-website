@@ -111,7 +111,7 @@ function VolunteerSignup() {
         >
           <h2>Volunteer Application Form</h2>
           {submitError && (
-            <div className="error-message" style={{ color: '#dc2626', backgroundColor: '#fef2f2', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1rem' }}>
+            <div className="error-message" role="alert" aria-live="assertive" style={{ color: '#dc2626', backgroundColor: '#fef2f2', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1rem' }}>
               {submitError}
             </div>
           )}
@@ -178,8 +178,8 @@ function VolunteerSignup() {
             </div>
 
             <div className="form-group">
-              <label>Skills & Expertise (select all that apply)</label>
-              <div className="skills-grid">
+              <label id="skills-label">Skills & Expertise (select all that apply)</label>
+              <div className="skills-grid" role="group" aria-labelledby="skills-label">
                 {skillOptions.map(skill => (
                   <label key={skill} className="skill-checkbox">
                     <input
@@ -235,7 +235,7 @@ function VolunteerSignup() {
               ></textarea>
             </div>
 
-            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+            <button type="submit" className="submit-btn" disabled={isSubmitting} aria-busy={isSubmitting}>
               {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </button>
           </form>

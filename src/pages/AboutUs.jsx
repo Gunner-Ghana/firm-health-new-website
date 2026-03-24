@@ -256,7 +256,7 @@ function AboutUs() {
               className={`value-card ${visibleValueCards.has(index) ? 'animate-scale-up' : 'animate-hidden'}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <span className="value-icon">{value.icon}</span>
+              <span className="value-icon" aria-hidden="true">{value.icon}</span>
               <h3>{value.title}</h3>
               <p>{value.description}</p>
             </div>
@@ -311,7 +311,7 @@ function AboutUs() {
               }}
             >
               <div className="goal-header">
-                <span className="goal-icon">{goal.icon}</span>
+                <span className="goal-icon" aria-hidden="true">{goal.icon}</span>
                 <div className="goal-badge" style={{ backgroundColor: `${goal.color}20`, color: goal.color }}>
                   {goal.period}
                 </div>
@@ -349,7 +349,7 @@ function AboutUs() {
               className={`achievement-card ${visibleAchievements.has(index) ? 'animate-slide-right' : 'animate-hidden'}`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="achievement-icon">{achievement.icon}</div>
+              <div className="achievement-icon" aria-hidden="true">{achievement.icon}</div>
               <div className="achievement-content">
                 <span className="achievement-date">{achievement.date}</span>
                 <h3>{achievement.title}</h3>

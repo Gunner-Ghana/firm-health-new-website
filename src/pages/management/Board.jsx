@@ -88,6 +88,13 @@ function Board() {
     };
   }, [selectedMember]);
 
+  useEffect(() => {
+    if (!selectedMember) return;
+    const handleKey = (e) => { if (e.key === 'Escape') closeModal(); };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [selectedMember]);
+
   const openModal = (member) => {
     setSelectedMember(member);
   };
@@ -149,7 +156,7 @@ function Board() {
                   <p className="board-card-position">{member.position}</p>
                   {member.email && (
                     <a href={`mailto:${member.email}`} className="board-card-email">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                       </svg>
                       {member.email}
@@ -159,9 +166,10 @@ function Board() {
                   <button
                     className="board-card-btn"
                     onClick={() => openModal(member)}
+                    aria-label={`See biography of ${member.name}`}
                   >
                     See Biography
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
                   </button>
@@ -175,9 +183,15 @@ function Board() {
       {/* Biography Modal */}
       {selectedMember && (
         <div className="board-modal-overlay" onClick={closeModal}>
-          <div className="board-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="board-modal-close" onClick={closeModal}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+          <div
+            className="board-modal"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="board-modal-name"
+          >
+            <button className="board-modal-close" onClick={closeModal} aria-label="Close biography">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -197,7 +211,7 @@ function Board() {
                   </div>
                 )}
                 <div className="board-modal-info">
-                  <h2>{selectedMember.name}</h2>
+                  <h2 id="board-modal-name">{selectedMember.name}</h2>
                   <p className="board-modal-role">{selectedMember.role}</p>
                   <p className="board-modal-position">{selectedMember.position}</p>
                   {selectedMember.email && (

@@ -29,6 +29,17 @@ function Gallery() {
     };
   }, [lightboxOpen]);
 
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const handleKey = (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [lightboxOpen, filteredPhotos]);
+
   const openLightbox = (index) => {
     setCurrentImage(index);
     setLightboxOpen(true);
@@ -90,9 +101,13 @@ function Gallery() {
                   className={`gallery-item ${visiblePhotos.has(index) ? 'animate-scale-up' : 'animate-hidden'}`}
                   style={{ transitionDelay: `${index * 50}ms` }}
                   onClick={() => openLightbox(index)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${photo.title} — ${photo.category}`}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(index); } }}
                 >
                   <img src={photo.image} alt={photo.title} />
-                  <div className="gallery-item-overlay">
+                  <div className="gallery-item-overlay" aria-hidden="true">
                     <span className="gallery-item-category">{photo.category}</span>
                     <h3>{photo.title}</h3>
                     <span className="gallery-zoom-icon">
@@ -120,9 +135,15 @@ function Gallery() {
 
       {/* Lightbox */}
       {lightboxOpen && filteredPhotos && filteredPhotos.length > 0 && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <button className="lightbox-close" onClick={closeLightbox}>×</button>
-          <button className="lightbox-prev" onClick={(e) => { e.stopPropagation(); prevImage(); }}>‹</button>
+        <div
+          className="lightbox"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Photo lightbox: ${filteredPhotos[currentImage]?.title}`}
+        >
+          <button className="lightbox-close" onClick={closeLightbox} aria-label="Close lightbox">×</button>
+          <button className="lightbox-prev" onClick={(e) => { e.stopPropagation(); prevImage(); }} aria-label="Previous image">‹</button>
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             <img src={filteredPhotos[currentImage].image} alt={filteredPhotos[currentImage].title} className="lightbox-image" />
             <div className="lightbox-info">
@@ -131,7 +152,7 @@ function Gallery() {
               <p>{currentImage + 1} / {filteredPhotos.length}</p>
             </div>
           </div>
-          <button className="lightbox-next" onClick={(e) => { e.stopPropagation(); nextImage(); }}>›</button>
+          <button className="lightbox-next" onClick={(e) => { e.stopPropagation(); nextImage(); }} aria-label="Next image">›</button>
         </div>
       )}
     </div>
